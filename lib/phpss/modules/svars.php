@@ -52,8 +52,8 @@ function phpss_svars_autoget_handler($event, $data) {
 
 		// set all variables in the global scope
 		foreach($res AS $row) {
-			global $$row[0];
-			$$row[0] = unserialize($row[1]);
+            global ${$row[0]};
+            ${$row[0]} = unserialize(base64_decode($row[1]));
 		}
 	}
 }
@@ -74,7 +74,7 @@ function phpss_svars_get($name) {
 				AND name = '" . $name . "'";
 	$res = phpss_db_query($query);
 
-	return (sizeof($res) > 0 ? unserialize($res[0][0]) : "");
+	return (sizeof($res) > 0 ? unserialize(base64_decode($res[0][0])) : "");
 }
 
 // void phpss_svars_set(str name, mixed data)
@@ -86,7 +86,7 @@ function phpss_svars_set($name, $data) {
 	$sessionid = phpss_svars_get_session_id();
 
 	// serialize data, and escape special chars
-	$sqldata = addslashes(serialize($data));
+	$sqldata = base64_encode(serialize($data));
 
 	// check whether to update or insert the entry
 	if (phpss_svars_exists($name, $sessionid) == true) {

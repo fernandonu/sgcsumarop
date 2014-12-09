@@ -17,6 +17,20 @@ define("UPLOADS_DIR", ROOT_DIR."/uploads");		// Directorio para uploads
 header("Cache-control: no-cache");
 header("Expires: ".gmdate("D, d M Y H:i:s")." GMT");
 
+require_once LIB_DIR."/Browser.php";
+$browser = new Browser();
+if( $browser->isBrowser("Chrome") ||
+	($browser->isBrowser("Internet Explorer") && $browser->getVersion() >= 11)
+  )
+{
+  define("BROWSER_OK", true);
+}
+else
+{
+  define("BROWSER_OK", false);
+}
+
+
 /*******************************************
  ** Colores del sistema.
  *******************************************/
@@ -30,8 +44,8 @@ $bgcolor4 = "#FF0000";		// Color de fondo para tareas vencidas
 $bgcolor  = "#d1c294";
 
 
-$bgcolor_out  = "#CFE8DD"; // Color de fondo (onmouseout)
-$bgcolor_over = "#82B39E"; // Color de fondo (onmouseover)
+$bgcolor_out  = "#F2EFFB"; // Color de fondo (onmouseout)
+$bgcolor_over = "#E0E6F8"; // Color de fondo (onmouseover)
 $text_color_out  = "#000000";
 $text_color_over = "#000000";//"#006699";
 $fondo = "fondo_alter.gif"; //imagen de fondo
@@ -58,7 +72,7 @@ $db_type = 'postgres8';				// Tipo de base de datos.
 $db_host = 'localhost';		// Host para desarrollo.
 $db_user = 'projekt';				// Usuario.
 $db_password = 'propcp';			// Contraseña.
-$db_name = 'sgcsumarop';
+$db_name = 'sgcsumar';
 
 
 // IPs permitidas para conectarse al gestion, si el ip no esta aca, se envia un mail
@@ -138,11 +152,16 @@ else $actualizar_menu_perfil_usuario='true';
 $html_header = "
 <html>
   <head>
+    <!--<meta http-equiv='X-UA-Compatible' content='IE=edge'>-->
 	<link rel='icon' href='".((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME'])."$html_root/favicon.ico'>
 	<link REL='SHORTCUT ICON' HREF='".((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME'])."$html_root/favicon.ico'>
-	<link rel=stylesheet type='text/css' href='$html_root/lib/estilos.css'>
-    <script languaje='javascript' src='$html_root/lib/funciones.js'></script>
-    <script language='javascript'>
+	<link rel='stylesheet' type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/bootstrap.min.css'>
+	<link rel='stylesheet' type='text/css' href='$html_root/lib/estilos.css'>
+	<link rel='stylesheet' type='text/css' href='$html_root/lib/estilos_bootstrap.css'>
+    <script type='text/javascript' src='$html_root/lib/jquery/jquery-1.11.1.min.js'></script>
+    <script type='text/javascript' src='$html_root/lib/bootstrap-3.3.1/js/bootstrap.min.js'></script>
+    <script type='text/javascript' src='$html_root/lib/funciones.js'></script>
+    <script type='text/javascript'>
 		var winW=window.screen.Width;
 		var valor=(winW*25)/100;
 		var nombre1;
@@ -167,12 +186,15 @@ $html_header = "
 			    if(parent && parent.oPath && $actualizar_menu_perfil_usuario) parent.oPath.updateLink();//actualiza el link del menu actual
 			   
 		}
+		$( document ).ready(function() {
+  			$('html').on('click', function () {
+				parent.$('#frame2').trigger('click');
+			});
+			check_fix_size();
+		});
 	</script>
   </head>
- <body topmargin=0 background=$html_root/imagenes/$fondo bgcolor=\"$bgcolor3\"  onload='check_fix_size();' onresize='check_fix_size();'>";
-$footer='   
-    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/jquery.js"></script>
-    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/jquery-migrate-1.2.1.js"></script>
-    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/bootstrap.js"></script>    
-';
+ <body topmargin=0 background=$html_root/imagenes/$fondo bgcolor=\"$bgcolor3\" onresize='check_fix_size();'>";
+
+$footer='';
 ?>

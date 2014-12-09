@@ -2,6 +2,9 @@
 require_once "config.php";
 require_once("./modulos/permisos/permisos.class.php");
 
+// Cargar el menu viejo
+$old_menu = BROWSER_OK ? false : true;
+
 if ($parametros['mode'] == "logout") {
 	phpss_logout();
 	$mode = "";
@@ -33,19 +36,20 @@ else {
 <head>
 <title>Programa SUMAR</title>
 
-<link rel='icon' href='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'>
-<link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel='icon' href='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'/>
+<link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $html_root; ?>/lib/bootstrap-3.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $html_root; ?>/lib/estilos_bootstrap.css"/>
 <?
 
-
-echo "<link rel='STYLESHEET' type='text/css' href='$html_root/lib/dhtmlXMenu_xp.css'>";
-  
-
-echo "<script  src='$html_root/lib/dhtmlXCommon.js'></script>";
-echo "<script  src='$html_root/lib/dhtmlXProtobar.js'></script>";
-echo "<script  src='$html_root/lib/dhtmlXMenuBar.js'></script>";
-echo "<script  src='$html_root/lib/dhtmlXTree.js'></script>";
+if ($old_menu) {
+	echo "<link rel='STYLESHEET' type='text/css' href='$html_root/lib/dhtmlXMenu_xp.css'>";
+	echo "<script  src='$html_root/lib/dhtmlXCommon.js'></script>";
+	echo "<script  src='$html_root/lib/dhtmlXProtobar.js'></script>";
+	echo "<script  src='$html_root/lib/dhtmlXMenuBar.js'></script>";
+	echo "<script  src='$html_root/lib/dhtmlXTree.js'></script>";
+}
 ?>
 </head>
 <?
@@ -61,7 +65,7 @@ $accesos=$usuario->get_Accesos();
 
 ?>
 
-<body topmargin=0 leftmargin=0 rigthmargin=0 marginwidth="0" marginheight="0" style="{overflow-x:auto; overflow-y:hidden;}" onresize="fix_size();" onload="fix_size();" bgcolor='<?echo $bgcolor_frames;?>'>  
+<body topmargin=0 leftmargin=0 rigthmargin=0 marginwidth="0" marginheight="0" style="{overflow-x:auto; overflow-y:hidden;}" onresize="fix_size();" bgcolor='<?echo $bgcolor_frames;?>'>  
 <table name="contenido" id="contenido" width='100%' align="center" cellpadding="0" cellspacing="0" border="0">
   <tr>
 		<td height="54" valign="top">
@@ -114,7 +118,7 @@ $accesos=$usuario->get_Accesos();
 	                  $debug_link = encode_link($html_root."/index.php",array("mode"=>"debug","debug_status"=>"on"));
 	                  $debug_desc = "Debugger Desactivado\nHaga click aquí para activarlo";
                     }
-				   echo "<td align='right'><A onclick='location.href=\"$debug_link&menu=\"+tempLinkHref;' target='_top'><img src='$html_root/imagenes/debug-$debug_status.gif' alt='$debug_desc' border='0'></a></td>";
+				   echo "<td align='right'><A onclick='location.href=\"$debug_link&menu=\"+tempLinkHref;' target='_top'><img src='$html_root/imagenes/debug-$debug_status.gif' alt='$debug_desc' border='0' width='32px' height='30px'></a></td>";
 				   
 
                    }?>				
@@ -124,7 +128,7 @@ $accesos=$usuario->get_Accesos();
 					<tr>
 						<td align="right">
 						<b><font face="Trebuchet MS" size="<?=$size?>" color="Navy">
-						Programa SUMAR
+						Programa SUMAR 
 						</font></b></td>
 					</tr>
 					
@@ -177,7 +181,32 @@ $accesos=$usuario->get_Accesos();
 		</td>
 	</tr>
 <tr>
-  <td colspan=2><div id="xpstyle" style="width:100%;"></div> </td>
+  <td colspan=2>
+<?php
+if ($old_menu) { 
+    echo '<div id="xpstyle" style="width:100%;"></div>';
+}
+else {
+    require_once("lib/fleximenu/autoload.php");
+
+    $main = new Menu;
+
+	$arbol=new ArbolOfPermisos("root");	
+	$arbol->createMenu($usuario);
+	$main = $arbol->saveBootstrapMenu($main);
+?>
+<header class="navbar navbar-inverse bs-docs-nav" role="banner">
+    <nav class="navbar bs-navbar" role="navigation">
+      <ul class="nav navbar-nav">
+            <?php echo bootstrapItems($main,$html_root); ?>
+      </ul>
+    </nav>
+</header>
+
+<?php
+} // else old_menu
+?>
+  </td>
 </tr>
 <?
 if ($parametros['mode'] == "debug") {  //es porque seleccionó el debugger y tiene que mantener la pagina
@@ -212,7 +241,10 @@ $src=$html_root."/modulos/$modulo_inicio/$pagina_inicio";
 
 ?>
 </table>
-<script>
+<?php 
+if ($old_menu) {
+?>
+    <script type="text/javascript">
 	  function onButtonClick(itemId,itemValue) {
 		//document.all.frame2.src='';
 	  };
@@ -230,14 +262,23 @@ $src=$html_root."/modulos/$modulo_inicio/$pagina_inicio";
 //        menu.loadXML("menunew.xml");
 //		menu.showBar();
 //	
-        
-        
-function fix_size() {
+    </script>
+<?php
+}
+?>
+<script type="text/javascript" src="<?php echo $html_root;?>/lib/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="<?php echo $html_root;?>/lib/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function fix_size() {
+    //	alert($( window ).height()+' - ' + $( document ).height()+' - ' + window.document.body.clientHeight );
 	//seteamos al maximo posible el largo del frame 2, para no desperdiciar espacio al final de la pagina ?>
-	var largo_body = window.document.body.clientHeight - ((document.all)?88:88);
+	//var largo_body = window.document.body.clientHeight - ((document.all)?88:108);
+	var position = $('#frame2').position();
+	var largo_body = $( document ).height() - position.top; //((document.all)?88:108);
 	document.getElementById('frame2').style.height=largo_body+"px";
 	document.getElementById('contenido').style.width=((document.all)?100:100)+"%";
- }
+    }
  
  //Valores para la pagina de inicio
 
@@ -256,8 +297,10 @@ function fix_size() {
  	this.href=tempLinkHref;
  	this.target=tempLinkTarget;
   };
- 
+
+	$( document ).ready(function() {
+		fix_size();
+	});
 </script>
 </body>
-
 </html>

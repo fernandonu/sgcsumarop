@@ -1,9 +1,22 @@
 <?
-
 if (ereg("/login.php",$_SERVER["SCRIPT_NAME"])) {
 	$tmp=explode("/login.php",$_SERVER["SCRIPT_NAME"]);
 	$html_root = $tmp[0];
 }
+
+require_once "lib/Browser.php";
+$browser = new Browser();
+if( $browser->isBrowser("Chrome") ||
+  ($browser->isBrowser("Internet Explorer") && $browser->getVersion() >= 11)
+  ) 
+{
+  define("BROWSER_OK", true);
+}
+else
+{
+  define("BROWSER_OK", false);
+}
+
 ?>
 <html>
 

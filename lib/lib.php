@@ -668,7 +668,7 @@ function html_out($outstr){
 //function uev_out($outstr){return ereg_replace("'","&#39;",htmlspecialchars(urlencode($outstr)));}
 
 
-function atrib_tr($bgcolor_out_int='#CFE8DD'){
+function atrib_tr($bgcolor_out_int='#F2EFFB'){
   global $bgcolor_over, $text_color_over, $text_color_out ;
   return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
          }
@@ -704,6 +704,11 @@ function atrib_tr6($bgcolor_out_int='#81BEF7'){
          }
          
 function atrib_tr7($bgcolor_out_int='#F5D0A9'){
+  global $bgcolor_over, $text_color_over, $text_color_out ;
+  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
+         }
+		 
+function atrib_tr8($bgcolor_out_int='#00FF00'){
   global $bgcolor_over, $text_color_over, $text_color_out ;
   return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
          }
@@ -1659,22 +1664,39 @@ function generar_barra_nav($campos_barra) {
 			$valor["descripcion"] .= " (".$total_registros[$valor["cmd"]].")";
 		}
 		if ($cmd == $valor["cmd"]) {
-			$menuid="ma background='$html_root/imagenes/btn_verde.gif'";
-            $barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >";
-			$barra .= "<a href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
-			$barra .= $valor["descripcion"];
-            $barra.="</a></td>";
+			if (BROWSER_OK) {
+	            $barra .= '<a class="btn btn-primary active" role="button" href="'.encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"])).'">'.$valor["descripcion"].'</a>';
+			}
+			else {
+	            $barra .= "<td width='$width%'>";
+				$barra .= "<a class='btn btn-primary btn-block btn-sm active' href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
+				$barra .= $valor["descripcion"];
+	            $barra.="</a></td>";
+        	}
 		}
 		else {
-			$menuid="ma"." background='$html_root/imagenes/btn_azul.gif'";
-			$barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >";
-			$barra .= "<a href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
-			$barra .= $valor["descripcion"];
-			$barra.="</a></td>";
+			if (BROWSER_OK) {
+            	$barra .= '<a class="btn btn-primary" role="button" href="'.encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"])).'">'.$valor["descripcion"].'</a>';
+			}
+			else {
+				$barra .= "<td width='$width%'>";
+				$barra .= "<a class='btn btn-primary btn-block btn-sm' href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
+				$barra .= $valor["descripcion"];
+				$barra.="</a></td>";
+			}
 		}
 	}
-	echo "<table width=95% border=0 cellspacing=3 cellpadding=5 bgcolor='#FFFFFF' align=center>\n";    //bgcolor=$bgcolor3
-	echo "<tr>$barra</tr></table>\n";
+	if (BROWSER_OK) {
+		echo '
+		<div class="btn-group btn-group-justified" role="group">
+	      	'.$barra.'
+		</div>
+		';
+	}
+	else {
+		echo "<table width='95%' align='center'><tr><td><table class='table'>\n";
+		echo "<tr>${barra}</tr></table></td></tr></table>\n";
+	}
 }
 
 
@@ -1711,28 +1733,7 @@ function enviar_mail($para,$paracc,$parabcc,$asunto,$contenido,$adjunto,$path,$h
  if ($parabcc!='')$mail->AddBCC($parabcc);
  if ($adjunto!='')$mail->AddAttachment($path."/".$adjunto,$adjunto);
  return $mail->Send();
-}//fin funcion enviar_mail
-
-//funcion para enviar los mails alternativo (sebastian 08/2011) - en Gmail.com
-/*function enviar_mail($para,$paracc,$parabcc,$asunto,$contenido,$adjunto,$path,$htmlflag=1){
- $mail = new PHPMailer();	
- $mail->Mailer = "smtp"; 
- $mail->Host = "smtp.gmail.com"; //servidor de mi trabajo
- $mail->SMTPAuth = true; 
- $mail->Username = "plan.nacersl"; 
- $mail->Password = "nacer2006"; 
- $mail->Timeout=50; 
- $mail->From = "plan.nacersl@gmail.com";
- $mail->FromName = "Plan Nacer";
- $mail->AddAddress($para,$para);
- $mail->Subject = "Sistema Inteligente Plan Nacer - ".$asunto;
- $mail->Body = encabezado_mail().$contenido.firma_mail();
- if (!$htmlflag)$mail->IsHTML(true);
- if ($paracc!='')$mail->AddCC($paracc);
- if ($parabcc!='')$mail->AddBCC($parabcc);
- if ($adjunto!='')$mail->AddAttachment($path."/".$adjunto,$adjunto);
- return $mail->Send();
-}//fin funcion enviar_mail*/
+}
 
 
 function FileUpload($TempFile, $FileSize, $FileName, $FileType, $MaxSize, $Path, $ErrorFunction, $ExtsOk, $ForceFilename, $OverwriteOk,$comprimir=1,$mostrar_carteles=1) {

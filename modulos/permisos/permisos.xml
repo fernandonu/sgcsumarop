@@ -11,7 +11,7 @@
 <userdata name='nodeType'>1</userdata>
 <userdata name='name'>Reportes Calidad</userdata>
 <userdata name='dir'></userdata>
-<item id='3167' text='Auditoría de Calidad' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<item id='3167' text='AuditorÃ­a de Calidad' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
 <userdata name='nodeType'>2</userdata>
 <userdata name='name'>calidad_auditorias</userdata>
 <userdata name='dir'>calidad</userdata>
@@ -88,76 +88,6 @@
 </item>
 </item>
 </item>
-<item id='3210' text='Expedientes' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
-<userdata name='nodeType'>1</userdata>
-<userdata name='name'>Expedientes</userdata>
-<userdata name='dir'></userdata>
-<item id='3211' text='01 Bandeja Personal' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>exd_listado_per</userdata>
-<userdata name='dir'>expedientes</userdata>
-<item id='3212' text='Nuevo EXD' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>exd_nuevo</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-<item id='3215' text='Pases' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>pases</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-</item>
-<item id='3214' text='02 Bandeja Pendientes' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>exd_listado_pen</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-<item id='3213' text='03 Bandeja En Dependencia' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>exd_listado_dep</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-<item id='3216' text='04 Busqueda Simple' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>exd_listado_tot</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-</item>
-<item id='2896' text='Personal' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
-<userdata name='nodeType'>1</userdata>
-<userdata name='name'>Personal</userdata>
-<userdata name='dir'></userdata>
-<item id='2987' text='Capacitaciones' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>capacitaciones</userdata>
-<userdata name='dir'>personal</userdata>
-<item id='2988' text='capacitaciones_detalle' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>capacitaciones_detalle</userdata>
-<userdata name='dir'>personal</userdata>
-</item>
-</item>
-<item id='2898' text='Listado Legajos' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>listado_legajos</userdata>
-<userdata name='dir'>personal</userdata>
-<item id='2899' text='Administra Legajos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>modificar_legajo</userdata>
-<userdata name='dir'>personal</userdata>
-</item>
-<item id='3218' text='Contratacion Nuevo' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>con_nuevo</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-<item id='3217' text='Vincula Exd' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>vincula_exd</userdata>
-<userdata name='dir'>expedientes</userdata>
-</item>
-</item>
-</item>
 <item id='3198' text='Registro' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
 <userdata name='nodeType'>1</userdata>
 <userdata name='name'>Registro</userdata>
@@ -177,7 +107,7 @@
 <userdata name='name'>inf</userdata>
 <userdata name='dir'>registro</userdata>
 </item>
-<item id='3220' text='Informes ACE' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<item id='3219' text='Informes ACE' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
 <userdata name='nodeType'>2</userdata>
 <userdata name='name'>listado_ace</userdata>
 <userdata name='dir'>registro</userdata>
@@ -192,7 +122,7 @@
 <userdata name='name'>plan_listado_excel1</userdata>
 <userdata name='dir'>registro</userdata>
 </item>
-<item id='3219' text='Memo' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<item id='3220' text='MEMO' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
 <userdata name='nodeType'>2</userdata>
 <userdata name='name'>listado_memo</userdata>
 <userdata name='dir'>registro</userdata>
@@ -251,7 +181,7 @@
 <userdata name='nodeType'>1</userdata>
 <userdata name='name'>submenu_herramientas</userdata>
 <userdata name='dir'></userdata>
-<item id='235' text='Cambiar Contraseña' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<item id='235' text='Cambiar ContraseÃ±a' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
 <userdata name='nodeType'>2</userdata>
 <userdata name='name'>usuarios_contra</userdata>
 <userdata name='dir'>admin</userdata>
@@ -334,12 +264,12 @@
 <userdata name='name'>permisos_xml</userdata>
 <userdata name='dir'>permisos</userdata>
 </item>
-<item id='1617' text='permisos - Administración de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<item id='1617' text='permisos - AdministraciÃ³n de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
 <userdata name='nodeType'>3</userdata>
 <userdata name='name'>acl_admin</userdata>
 <userdata name='dir'>permisos</userdata>
 </item>
-<item id='1798' text='permisos - Administración de grupos de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<item id='1798' text='permisos - AdministraciÃ³n de grupos de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
 <userdata name='nodeType'>3</userdata>
 <userdata name='name'>group_admin</userdata>
 <userdata name='dir'>permisos</userdata>

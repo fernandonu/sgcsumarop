@@ -90,7 +90,6 @@ $db_schemas = array(
 	"permisos",
 	"sistema",			
 	"calidad",	
-	"personal",
 	"tareas_divisionsoft"
 
 );

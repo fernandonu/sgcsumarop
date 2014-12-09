@@ -1,0 +1,476 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<tree id='0' withoutImages='yes' text='' child='1' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>root</userdata>
+<userdata name='dir'></userdata>
+<item id='2857' text='Calidad' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>menu_calidad</userdata>
+<userdata name='dir'></userdata>
+<item id='3160' text='Reportes Calidad' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>Reportes Calidad</userdata>
+<userdata name='dir'></userdata>
+<item id='3167' text='Auditoría de Calidad' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>calidad_auditorias</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='3168' text='calidad_auditorias_detalle' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>calidad_auditorias_detalle</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+<item id='3169' text='editar_piramide' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>editar_piramide</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+</item>
+<item id='2858' text='Eventos/Incidentes' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>eventos_incidentes</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='2859' text='Modulo Calidad - Nuevo Evento' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>nuevo_evento</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+</item>
+<item id='2982' text='Manuales/Procedimientos' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_manual</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='2984' text='detalle_manual.php' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>detalle_manual</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+<item id='2983' text='permiso_manual' child='0' im0='item.gif' im1='item.gif' im2='item.gif' >
+<userdata name='nodeType'>4</userdata>
+<userdata name='name'>permiso_manual</userdata>
+<userdata name='dir'></userdata>
+</item>
+</item>
+<item id='3170' text='No Conformidades' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>no_conformes</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='3171' text='detalle_no_conformes' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>detalle_no_conformes</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+<item id='3172' text='imprimir_etiqueta' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>imprimir_etiqueta</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+</item>
+<item id='2985' text='P.A.C. / P.A.P.' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_pac_pap</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='2986' text='pac_pap' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>pac_pap</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+</item>
+<item id='3173' text='Quejas / Consultas' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listar_quejas</userdata>
+<userdata name='dir'>calidad</userdata>
+<item id='3174' text='calidad_quejas' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>calidad_quejas</userdata>
+<userdata name='dir'>calidad</userdata>
+</item>
+</item>
+</item>
+</item>
+<item id='3210' text='Expedientes' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>Expedientes</userdata>
+<userdata name='dir'></userdata>
+<item id='3211' text='01 Bandeja Personal' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>exd_listado_per</userdata>
+<userdata name='dir'>expedientes</userdata>
+<item id='3212' text='Nuevo EXD' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>exd_nuevo</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+<item id='3215' text='Pases' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>pases</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+</item>
+<item id='3214' text='02 Bandeja Pendientes' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>exd_listado_pen</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+<item id='3213' text='03 Bandeja En Dependencia' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>exd_listado_dep</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+<item id='3216' text='04 Busqueda Simple' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>exd_listado_tot</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+</item>
+<item id='2896' text='Personal' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>Personal</userdata>
+<userdata name='dir'></userdata>
+<item id='2987' text='Capacitaciones' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>capacitaciones</userdata>
+<userdata name='dir'>personal</userdata>
+<item id='2988' text='capacitaciones_detalle' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>capacitaciones_detalle</userdata>
+<userdata name='dir'>personal</userdata>
+</item>
+</item>
+<item id='2898' text='Listado Legajos' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_legajos</userdata>
+<userdata name='dir'>personal</userdata>
+<item id='2899' text='Administra Legajos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>modificar_legajo</userdata>
+<userdata name='dir'>personal</userdata>
+</item>
+<item id='3218' text='Contratacion Nuevo' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>con_nuevo</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+<item id='3217' text='Vincula Exd' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>vincula_exd</userdata>
+<userdata name='dir'>expedientes</userdata>
+</item>
+</item>
+</item>
+<item id='3198' text='Registro' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>Registro</userdata>
+<userdata name='dir'></userdata>
+<item id='3200' text='Administrar Plan' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>plan_admin</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3205' text='Ajax Proceso' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>ajax_proceso</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3202' text='Informe Audit' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>inf</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3220' text='Informes ACE' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_ace</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3203' text='Listado Excel Completo' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>plan_listado_excel</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3204' text='Listado Excel Simple' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>plan_listado_excel1</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3219' text='Memo' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_memo</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3201' text='Memo' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>memo</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+<item id='3199' text='Registro Expedientes' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>plan_listado</userdata>
+<userdata name='dir'>registro</userdata>
+</item>
+</item>
+<item id='2663' text='Utilidades' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>menu_utilidades</userdata>
+<userdata name='dir'></userdata>
+<item id='13' text='Archivos' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>submenu_archivos</userdata>
+<userdata name='dir'></userdata>
+<item id='1631' text='Archivos - Modificar archivos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>archivos_modificar</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+<item id='2676' text='Lista de archivos' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>admin</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+<item id='14' text='Listado de Archivos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>archivos_lista</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+<item id='2677' text='Modifica estructura de archivos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>archivos_mod_estructura</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+<item id='1632' text='Sube archivos al servidor' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>archivos_subir</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+<item id='15' text='Subir Archivos' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>archivos_nuevo</userdata>
+<userdata name='dir'>archivos</userdata>
+</item>
+</item>
+<item id='234' text='Herramientas' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>submenu_herramientas</userdata>
+<userdata name='dir'></userdata>
+<item id='235' text='Cambiar Contraseña' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usuarios_contra</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+<item id='237' text='Feriados' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>feriados</userdata>
+<userdata name='dir'>admin</userdata>
+<item id='2698' text='Borrar Feriados' child='0' im0='item.gif' im1='item.gif' im2='item.gif' >
+<userdata name='nodeType'>4</userdata>
+<userdata name='name'>permiso_borrar_feriados</userdata>
+<userdata name='dir'></userdata>
+</item>
+</item>
+<item id='238' text='Perfil de Usuario' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usuarios_perfil</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+</item>
+<item id='156' text='Mensajes' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>mensajes</userdata>
+<userdata name='dir'>mensajes</userdata>
+<item id='1657' text='mensajes - Borrar un mensaje' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>borrar</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+<item id='1804' text='mensajes - Guardar un mensaje' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>guardar_mens</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+<item id='1876' text='mensajes - Nuevo mensaje' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>nuevo_mens</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+<item id='1957' text='mensajes - Redirigir un mensaje' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>redirige</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+<item id='2040' text='mensajes - Ver detalles de un mensaje' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>ver_mens</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+<item id='1857' text='mensajes - Ver todos los mensajes' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>mensajeria</userdata>
+<userdata name='dir'>mensajes</userdata>
+</item>
+</item>
+<item id='239' text='Sistema' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>sistema</userdata>
+<userdata name='dir'></userdata>
+<item id='241' text='Nuevo Usuario' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usuarios_nuevo</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+<item id='2' text='Permisos' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>permisos_main</userdata>
+<userdata name='dir'>permisos</userdata>
+<item id='2706' text='Activar-desactivar debug' child='0' im0='item.gif' im1='item.gif' im2='item.gif' >
+<userdata name='nodeType'>4</userdata>
+<userdata name='name'>debug</userdata>
+<userdata name='dir'></userdata>
+</item>
+<item id='11' text='Permisos' child='1' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>permisos</userdata>
+<userdata name='dir'>permisos</userdata>
+<item id='3' text='generador de xml' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>permisos_xml</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1617' text='permisos - Administración de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>acl_admin</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1798' text='permisos - Administración de grupos de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>group_admin</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1638' text='permisos - Asignacion de grupos de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>assign_group</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1882' text='permisos - Busqueda de objetos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>object_search</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1618' text='permisos - Debugger de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>acl_debug</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1756' text='permisos - Editar grupos de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>edit_group</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1757' text='permisos - Editar objetos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>edit_objects</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1758' text='permisos - Editar secciones de objetos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>edit_object_sections</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='1619' text='permisos - Prueba de ACLs' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>acl_test</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+</item>
+<item id='9' text='Permisos-Gruposs' child='1' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>permisos-grp</userdata>
+<userdata name='dir'>permisos</userdata>
+<item id='10' text='Permisos-Grupos Proc' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>permisos-grp_proc</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+<item id='5' text='generador xml para la lista de usuarios del grupo' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>lista_usr_xml</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+</item>
+<item id='8' text='Permisos-Usuarios' child='1' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>permisos-usr</userdata>
+<userdata name='dir'>permisos</userdata>
+<item id='4' text='generador xml para la lista de grupos del usuario' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>lista_grp_xml</userdata>
+<userdata name='dir'>permisos</userdata>
+</item>
+</item>
+</item>
+<item id='3206' text='Usuario - Areas' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usr_areas_listado</userdata>
+<userdata name='dir'>admin</userdata>
+<item id='3207' text='Usr Areas Admin' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>usr_areas_admin</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+</item>
+<item id='3208' text='Usuario - Provincias' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usr_pcias_listado</userdata>
+<userdata name='dir'>admin</userdata>
+<item id='3209' text='Usr Pcias Admin' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>usr_pcias_admin</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+</item>
+<item id='243' text='Usuarios' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usuarios_view</userdata>
+<userdata name='dir'>admin</userdata>
+<item id='2675' text='Editar datos usuario' child='0' im0='item.gif' im1='item.gif' im2='item.gif' >
+<userdata name='nodeType'>4</userdata>
+<userdata name='name'>usuarios_edit</userdata>
+<userdata name='dir'></userdata>
+</item>
+</item>
+<item id='244' text='Usuarios conectados' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>usuarios_conectados</userdata>
+<userdata name='dir'>admin</userdata>
+</item>
+</item>
+<item id='2975' text='Tareas' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
+<userdata name='nodeType'>1</userdata>
+<userdata name='name'>Tareas</userdata>
+<userdata name='dir'></userdata>
+<item id='2976' text='Proyectos' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>lista_proyectos</userdata>
+<userdata name='dir'>tareas</userdata>
+<item id='2980' text='Archivo Proyectos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>subir_archivo_proyectos</userdata>
+<userdata name='dir'>tareas</userdata>
+</item>
+<item id='2979' text='Carga Proyectos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>cargar_proyectos</userdata>
+<userdata name='dir'>tareas</userdata>
+</item>
+</item>
+<item id='2977' text='Tareas' child='1' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
+<userdata name='nodeType'>2</userdata>
+<userdata name='name'>listado_tareas</userdata>
+<userdata name='dir'>tareas</userdata>
+<item id='2978' text='Cargar Tarea' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>cargar_tarea</userdata>
+<userdata name='dir'>tareas</userdata>
+</item>
+</item>
+</item>
+</item>
+</tree>

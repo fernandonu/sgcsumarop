@@ -82,12 +82,13 @@ if ($cmd=="cuatf")
 echo $html_header;
 ?>
 <form name=form1 action="plan_listado.php" method=POST>
-<table cellspacing=2 cellpadding=2 border=0 width=100% align=center>
-     <tr>
-      <td align=center>
+
+<table cellspacing=2 cellpadding=2 border=0 width=100% align=center >
+     <tr >
+      <td align=center class="table table-hover">
 		<?list($sql,$total_muletos,$link_pagina,$up) = form_busqueda($sql_tmp,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
-	    &nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'>
-		  &nbsp;&nbsp;<input type='button' name="nueva_exd" value='Nuevo Expediente' onclick="document.location='plan_admin.php'">
+	    &nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'style="width:120px;height:30px">
+		  &nbsp;&nbsp;<input type='button' name="nueva_exd" value='Nuevo Expediente' onclick="document.location='plan_admin.php'" style="width:120px;height:30px">
       &nbsp;&nbsp;<? $link=encode_link("plan_listado_excel.php",array("cmd"=>$cmd));?>
       <b>Listado Completo: </b><img src="../../imagenes/excel.gif" style='cursor:hand;' title="Listado Completo" onclick="window.open('<?=$link?>')">
       &nbsp;&nbsp;<? $link=encode_link("plan_listado_excel1.php",array("cmd"=>$cmd));?>
@@ -98,11 +99,11 @@ echo $html_header;
 
 <?$result = sql($sql) or die;?>
 
-<table border=0 width=100% cellspacing=2 cellpadding=2 bgcolor='<?=$bgcolor3?>' align=center>
+<table class="table table-hover">
   <tr>
   	<td colspan=12 align=left id=ma>
      <table width=100%>
-      <tr id=ma>
+      <tr >
        <td width=30% align=left><b>Total:</b> <?=$total_muletos?></td>       
        <td width=40% align=right><?=$link_pagina?></td>
       </tr>
@@ -118,7 +119,7 @@ echo $html_header;
     <td align=right id=mo><a id=mo href='<?=encode_link("plan_listado.php",array("sort"=>"3","up"=>$up))?>'>Expediente</a></td>
     <td align=right id=mo><a id=mo href='<?=encode_link("plan_listado.php",array("sort"=>"4","up"=>$up))?>'>Usuario</a></td>    
     <?if ($cmd=="todos"){?>
-    	<td align=right id=mo>Tipo Liquidacion</td>
+    	<td align=right id='mo'>Tipo Liquidacion</td>
     <?}?>  
   </tr>
  <?
@@ -127,7 +128,7 @@ echo $html_header;
    	$onclick_elegir="location.href='$ref'";
   
     if (($result->fields['estado_capitas']=='1')or($result->fields['estado_adm']=='1')) {
-      $color='D7DF01';
+      $color='#F5F6CE';
       if ($result->fields['estado_capitas']=='1'){
         $title='El Registro de Capita esta Revisado y NO Aprobado';
       }
@@ -151,14 +152,14 @@ echo $html_header;
     }?>    
 </table>
 <br>
-  <table align='center' border=1 bordercolor='#000000' bgcolor='#FFFFFF' width='80%' cellspacing=0 cellpadding=0>
-     <tr>
+  <table class="table table-bordered" >
+     <tr id=mo>
       <td colspan=10 bordercolor='#FFFFFF'><b>Colores de Referencia para la Columna NUMERO DE REGISTRO:</b></td>
      <tr>
      <td width=30% bordercolor='#FFFFFF'>
-      <table border=1 bordercolor='#FFFFFF' cellspacing=0 cellpadding=0 width=100%>
+      <table class="table table-bordered" border=1 bordercolor='#FFFFFF' cellspacing=0 cellpadding=0 width=100%>
        <tr>
-        <td width=30 bgcolor='#D7DF01' bordercolor='#000000' height=30>&nbsp;</td>
+        <td width=30 bgcolor='#F5F6CE' bordercolor='#000000' height=30>&nbsp;</td>
         <td bordercolor='#FFFFFF'>El Plan de Calidad contiene un Registro Revisado y NO Aprobado</td>
        </tr>              
       </table>

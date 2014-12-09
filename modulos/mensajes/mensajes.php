@@ -75,10 +75,10 @@ if(($_POST['boton1']!='Mensajeria')&&($_ses_mensajes_primera_v != 1)){
    $fecha_actual=date("Y-m-d H:m:s");
    $fecha_proxima=date("Y-m-d",mktime(0,0,0,date("m"),(date("d")+7),date("Y")));
    $sql = "select count(id_mensaje) as cant from mensajes where tipo1='LIC' and tipo2='NOC' and terminado='f' and desestimado='f' and usuario_destino='".$_ses_user['login']."' and fecha_vencimiento < '$fecha_actual'";
-   $result=$db->Execute($sql) or die($db->ErrorMsg());
+   $result=sql($sql) or fin_pagina();
    $vench=$result->fields["cant"];
    $sql = "select count(id_mensaje) as cant from mensajes where tipo1='LIC' and tipo2='NOC' and terminado='f' and desestimado='f' and usuario_destino='".$_ses_user['login']."' and fecha_vencimiento <= '$fecha_proxima'";
-   $result=$db->Execute($sql) or die($db->ErrorMsg());
+   $result=sql($sql) or fin_pagina();
    $noc=$result->fields["cant"];
 
  if($noc){
@@ -99,53 +99,37 @@ if(($_POST['boton1']!='Mensajeria')&&($_ses_mensajes_primera_v != 1)){
 
  // actualizo fecha de recibido y bit de recibido de los que no lo tienen
 $sql1="select id_mensaje,fecha_recibo from mensajes where recibido='f' or fecha_recibo is null and usuario_destino='".$_ses_user['login']."'";
-$result1=$db->Execute($sql1) or die($db->ErrorMsg());
+$result1=sql($sql1) or fin_pagina();
 $fecha_r=date("Y-m-d H:i:s");
 while (!$result1->EOF)
 {
  if($result1->fields['fecha_recibo']==''){
    $sql="update mensajes set fecha_recibo='".$fecha_r."' where id_mensaje=".$result1->fields['id_mensaje'];
-   $result=$db->Execute($sql) or die($db->ErrorMsg());
+   $result=sql($sql) or fin_pagina();
    }
 $result1->MoveNext();      
 }
  ?>
 <form name="form" method="post" action="mensajes.php">
-<center>
-    <table width="60%" border="0">
-      <tr bgcolor="#c0c6c9"> 
-        
-        <td width="52" valign="top"> 
-          <div align="right">
-		   <?php if($_ses_user['login']=='fer')
-           echo'<input style="border-style: outset;	border-width: 1px; border-color: #000000; background-color: #F5F5F5;
-				color: #000000;font-size=8pt;text-align: center;cursor:hand;" type="submit" name="boton" value="Mensajeria">';?>
-          </div>
-        </td>
+    
+    <table border="1" class="table table-hover">
+    
+    <div >
+    <input class="btn btn-info" type="submit" name="boton" value="Enviar Nuevo Mensaje">
+    <input class="btn btn-warning" type="submit" name="boton" value="Reenviar Mensaje" onClick="return comprueba();">
+    <input class="btn btn-danger" type="submit" name="boton" value="Borrar Mensaje" onClick="return borrar();">
+    </div>
+
+	  <tr id='mo'>
+        <td width="2%" >&nbsp;</td>
+        <td width="10%"> Fecha entrega </td>
+        <td width="70%"> Mensaje </td>
+        <td width="10%"> Vencimiento </td>
       </tr>
-    </table>
-    <table border="0" cellspacing="2" cellpadding="0" width="60%">
-	  <tr bgcolor="#006699">
-        <td width="26" height="19" valign="top">&nbsp;</td>
-        <td width="129" valign="top"> 
-          <center>
-            <a style="text-decoration:none" href=<?php echo "mensajes.php?est=0"; ?>><font size="2" family="helvetica, sans-serif" color="#c0c6c9"><b>Fecha entrega</b></font></a> 
-          </center>
-        </td>
-        <td width="391"> 
-          <center>
-            <a  style="text-decoration:none" href=<?php echo "mensajes.php?est=1"; ?>><font size="2" family="helvetica, sans-serif" color="#c0c6c9"><b>Mensaje</b></font></a> 
-          </center>
-        </td>
-        <td width="145"> 
-          <a  style="text-decoration:none " href=<?php echo "mensajes.php?est=2"; ?>><div align="center"><font size="2" family="helvetica, sans-serif" color="#c0c6c9"><b>Vencimiento</b></font></div></a>
-        </td>
-      </tr>
-    </table>
+   
 		  
-		  <div style="position:relative; width:100%; height:55%; overflow:auto;">
           
-      <table border="0" cellspacing="2" cellpadding="0" width="60%">
+      
         <?php
 		   //$fecha_actual=date("Y/m/d H:i:s");
 		   $fecha_actual=date("Y/m/d");
@@ -154,15 +138,11 @@ $result1->MoveNext();
 		   //$hora_a=substr($fecha_actual,10,16);
 			list($aa,$ma,$da) = explode("/",$fecha_actual);
 			list($ha,$mia)= explode(":",$hora_actual);
-			switch($est){
-			  case "0": $orden=" order by fecha_entrega";break;
-			  case "1": $orden=" order by comentario";break;
-			  case "2": $orden=" order by fecha_vencimiento";break;
-			  default:$orden=" order by fecha_recibo desc";break;
-			}
+			$orden=" order by fecha_recibo desc";
 			$sql="select tipo1,recibido,id_mensaje,comentario ,titulo, fecha_entrega, fecha_vencimiento,fecha_recibo from mensajes where terminado='f' and desestimado='f' and usuario_destino='".$_ses_user['login']."'".$orden;
-			$result=$db->Execute($sql) or die($db->ErrorMsg());
-	        $cantidad+=$result->RecordCount();
+			$result=sql($sql) or fin_pagina();
+	        
+          $cantidad+=$result->RecordCount();
 	   			$i=0;
 	   			while(!$result->EOF){ 
                	if ($i==0)
@@ -178,15 +158,8 @@ $result1->MoveNext();
 			 $fecha_v=substr($result->fields['fecha_vencimiento'],0,10);
              $hora_v=substr($result->fields['fecha_vencimiento'],11,16);
 			 list($a,$m,$d) = explode("-",$fecha_v);
-             list($hv,$miv,$sv)= explode(":",$hora_v);
-			 if (($aa>$a) || (($aa==$a) && ($ma>$m)) || (($aa==$a) && ($ma==$m) && ($da-$d>=1)))
-				$color1="FF0000";//rojo
-			 elseif((($aa==$a)&&($ma==$m)&&($da==$d)&&($ha>$hv))||(($aa==$a)&&($ma==$m)&&($da==$d)&&($ha==$hv)&&($mia>$miv))) $color1="FF0000";  // saque esto &&($mia>$miv) porque no funciona con la condicion and
-			 else $color1=''; //rojo
-			 if ((($aa==$a)&&($ma==$m)&&(($da+1)==$d))||(($aa==$a)&&($ma+1==$m)&&($d==1)&&(($da==30)||($da==31)))) $color1="FFFF00"; //amarillo
-			 elseif (($aa==$a)&&($ma==$m)&&($da==$d)&&(($ha<$hv)||(($ha==$hv)&&($mia<=$miv)))) $color1="FFFF00"; //amarillo
-
-             if  ($result->fields['recibido']=='f') $color1="00FF00";  //verde
+       list($hv,$miv,$sv)= explode(":",$hora_v);
+			             
 			 if ($result->fields['fecha_recibo']=="")
  					{$filas_encontradas++;
   					 $id[]=$result->fields['id_mensaje'];
@@ -196,7 +169,7 @@ $result1->MoveNext();
 		<input type="hidden" name="tipo1" value="<?php echo $result->fields['tipo1']; ?>">
         <a href="ver_mens.php?id_mensaje=<? echo $result->fields['id_mensaje'];?>&donde=0"> 
         <tr bgcolor="<?php echo $color; ?>"  title="<?php echo $result->fields['titulo']; ?>" onMouseOver="sobre(this,'#FFFFFF');" onMouseOut="bajo(this,'<? echo $color;?>' );"> 
-          <td width="24" height="18" valign="top" bgcolor="<?php echo $color1;?>" > 
+          <td width="24" height="18" valign="top"  > 
             <input type="radio" name="radio" value="<?php echo $result->fields['id_mensaje'] ?>">
           </td>
           <td width="131" valign="top" > 
@@ -208,9 +181,8 @@ $result1->MoveNext();
 			  echo $fecha1.$tiempo1;
 			  ?>
               </font> 
-            </center>
 		  </td>
-          <td width="388" valign="top"> <font size=2 color="<?php echo $color2; ?>"> 
+          <td width="388" valign="top"> <font size=2 > 
             <center>
               <?php echo $result->fields['comentario'];?>
             </center>
@@ -233,32 +205,14 @@ $result1->MoveNext();
 ?>
 	  </table>
           
-    </div>
-   <hr>
-    <table border=1 bordercolor='#000000' bgcolor='#FFFFFF' width='60%'>
-      <tr> 
-		<td width=19 valign="top" height=23 bgcolor='#FFFF00' bordercolor='#000000'>&nbsp;</td>
-        <td width=237 valign="top" bordercolor='#FFFFFF'><font face="Arial, Helvetica, sans-serif" size="2">Mensaje 
-          proximo a vencer</font></td>
-        <td width=19 valign="top" bgcolor='#00FF00' bordercolor='#000000'>&nbsp;</td>
-        <td width="147" valign="top" bordercolor='#FFFFFF'> <font size="2" face="Arial, Helvetica, sans-serif">Mensaje 
-          Nuevo</font> </td>
-        <td width=19 valign="top" bgcolor='#FF7878' bordercolor='#000000'>&nbsp;</td>
-        <td width="193" valign="top" bordercolor='#FFFFFF'><font size="2" face="Arial, Helvetica, sans-serif">Mensaje 
-          vencido</font></td>
-      </tr>
-    </table><br>
+
+
+    
 <input type="hidden" name="cantr" value="<?PHP echo $cantidad; ?>">
 <input type="hidden" name="mensaje" value="">
-<input type="submit" name="boton" value="Enviar Nuevo Mensaje">
-&nbsp&nbsp&nbsp<input type="submit" name="boton" value="Reenviar Mensaje" onClick="return comprueba();">
-&nbsp&nbsp&nbsp<input type="submit" name="boton" value="Borrar Mensaje" onClick="return borrar();">
-</center>
 </form>
-</body>
-</html>
+
 <?php
  }
 }// fin switch
-
 ?>

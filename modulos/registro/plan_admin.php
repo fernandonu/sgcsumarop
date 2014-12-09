@@ -654,18 +654,21 @@ function clearfields(){
 <input type="hidden" value="<?=$id_registro?>" name="id_registro">
 <input type="hidden" value="<?=$id_dato_registro?>" name="id_dato_registro">
 
-<tr><td><table width='85%' border='1' align="center" bgcolor='<?=$bgcolor_out?>'> 
+<?php if ($accion){?>
+<table width='85%' border='1' align="center" class="table table-bordered"> 
 	<tr id="mo">
   		<td id=mo colspan="2">
   			<b>Mensajes de Registros</b>
   		</td>
   	</tr>  
-	<tr align="center">			
+	<tr align="center"class="table table-bordered">			
 		   <td>
 			<b><font size="3" color="Red"><?=$accion?></font></b>
 		   </td>
      </tr>           
-</table></td></tr> 
+</table>
+<?php }?>
+
 
 <?
 /*******Traemos y mostramos el Log **********/
@@ -678,18 +681,16 @@ $q="SELECT
 	order by id_log_registro DESC";
 $log=sql($q);
 ?>
-<div align="right">
-	<input name="mostrar_ocultar_log" type="checkbox" value="1" onclick="if(!this.checked)
+	<input name="mostrar_ocultar_log" type="checkbox" value="0" onclick="if(!this.checked)
 																	  document.all.tabla_logs.style.display='none'
 																	 else 
 																	  document.all.tabla_logs.style.display='block'
 																	  "> Mostrar Logs
-</div>	
 <!-- tabla de Log de la OC -->
-<div style="display:'none';width:98%;overflow:auto;<? if ($log->RowCount() > 3) echo 'height:60;' ?> " id="tabla_logs" >
-<table width='85%' border='1' align="center" bgcolor='<?=$bgcolor_out?>'>
+<div style="none:'block';width:98%;overflow:auto;<? if ($log->RowCount() > 3) echo 'height:60;' ?> " id="tabla_logs" >
+<table width='100%' border='1' align="center" class="table table-bordered"> 
 <?while (!$log->EOF){?>
-	<tr>
+	<tr class="table table-bordered">
 	      <td height="20" nowrap>Fecha <?=fecha($log->fields['fecha']). " " .Hora($log->fields['fecha']);?> </td>
 	      <td nowrap > Usuario : <?=$log->fields['usuario']; ?> </td>
 	      <td nowrap > Tipo : <?=$log->fields['tipo']; ?> </td>
@@ -699,9 +700,9 @@ $log=sql($q);
 }?>
 </table>
 </div>
-<hr>
+
 <?}/*******************  FIN  LOG  ****************************/?>
-<table width='85%' border='1' align="center" bgcolor='<?=$bgcolor_out?>'>
+<table width='85%' border='1' align="center" class="table table-bordered">
  <tr id="mo">
     <td>
     	<?if ($id_registro){?>
@@ -713,14 +714,14 @@ $log=sql($q);
     </td>
  </tr>
  
- <tr><td>
- <table width=100% align="center" >
+ <tr ><td class="table table-bordered">
+ <table width=100% align="center" class="table table-bordered">
 	     <tr align="center" id="mo">
 	      <td colspan="4" >
 	       <b> Carga Datos </b>
 	      </td>
 	     </tr>
-         <tr>
+         <tr >
          	<td align="right">
 				<b>Provincia:</b>
 			</td>
@@ -818,7 +819,7 @@ $log=sql($q);
 	</tr>
 
 	<?if ($id_registro){?>
-	<table width=100% align="center">
+	<table width=100% align="center" class="table table-bordered">
      <tr align="center" id="mo">
       <td colspan="4" >
        <b> Carga datos Capitas </b>
@@ -1041,7 +1042,7 @@ $log=sql($q);
             </td>
          </tr> 
 		 
-        </table>
+        
       </td>      
      </tr> 
      <?// -------------tablas dobes para armar los datos de la vacuna-----------------?>	  
@@ -1051,7 +1052,7 @@ $log=sql($q);
   			<b>Acciones</b>
   		</td>
   	</tr>  
-  	<tr>
+  	<tr class="table table-bordered">
 	 <td align="center" colspan="8" class="bordes">
 	 	<?if ($estado_capitas==0){?>
 		    <input type="submit" name="guardar_editar_2" value="Guardar" title="Guardar Registro Capitas" style="width:150px;height:40px" onclick="return control_nuevos_2()" >&nbsp;&nbsp;
@@ -1069,11 +1070,12 @@ $log=sql($q);
 
 	 </td>
 	</tr>	
+	</table>
 	<?}?>
 
 	<?if ($id_registro){?>
-	<tr><td><table width='85%' align="center" bgcolor='<?=$bgcolor_out?>'> 
-	<table width=100% align="center">
+	
+	<table width=100% align="center" class="table table-bordered">
 	
      <tr align="center" id="mo">
       <td colspan="4" >
@@ -1218,11 +1220,7 @@ $log=sql($q);
             </td>  	
          </tr>
 		 
-		
-		 
-        </table>
-      </td>      
-     </tr> 
+
      <?// -------------tablas dobes para armar los datos de la vacuna-----------------?>	  
 	 
 	 <tr id="sub_tabla">
@@ -1246,29 +1244,30 @@ $log=sql($q);
 		 	 	<font color="red" size="+1"><b>Registro Administracion Revisado Y Aprobado</b></font>
 		 	 <?}?>
 	 </td>
-	</tr>	
-	</table></td></tr> 
+	</tr>
+
+	</table>
+
 	<?}?>
 	
    
-  </table></td></tr>
-  </table>
+
   
   
-<tr><td><table width='85%' border='1' align="center" bgcolor='<?=$bgcolor_out?>'> 
-	<tr id="mo">
+<table width=100% align="center" class="table table-bordered">
+	<tr>
   		<td id=mo colspan="2">
   			<b>Acciones</b>
   		</td>
   	</tr>  
 	<tr align="center">			
 		   <td>
-			<input type=button name="volver" value="Volver" onclick="document.location='./plan_listado.php'"title="Volver al Listado" style="width:160px">
+			<input type=button name="volver" value="Volver" onclick="document.location='./plan_listado.php'"title="Volver al Listado" style="width:150px;height:40px">
 		   </td>
      </tr>           
-</table></td></tr> 
+</table>
 
-<script src="<?=$html_root?>/lib/bootstrap-3.1.1-dist/js/jquery.js" type="text/javascript"></script>
+
 <script>
 function realizaProceso(id1, id2, id3, ac1, ac2){
         var parametros = {
@@ -1292,7 +1291,7 @@ function realizaProceso(id1, id2, id3, ac1, ac2){
 }
 </script>
 
-<tr><td><table width='85%' border='1' align="center" bgcolor='<?=$bgcolor_out?>'> 
+<table width=100% align="center" class="table table-bordered">
 	<tr id="mo">
   		<td id=mo colspan="2">
   			<b>Mensajes de Registros Soporte</b>
@@ -1303,7 +1302,10 @@ function realizaProceso(id1, id2, id3, ac1, ac2){
 			<b><font size="3" color="Red"><span id="resultado"></span></font></b>
 		   </td>
      </tr>           
-</table></td></tr> 
+</table>
+
+  </table></td></tr>
+  </table>
 
  <?// --------------------tablas de muestra de vacunas dadas y facturadas 
 if ($id_registro){//carga de prestacion a paciente NO PLAN NACER
@@ -1312,8 +1314,8 @@ if ($id_registro){//carga de prestacion a paciente NO PLAN NACER
 			where id_registro='$id_registro'
 			ORDER BY id_noconforme DESC";
 $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pagina();?>
-<br>
-<tr><td><table width="100%" class="bordes" align="center">
+
+<table width=100% align="center" class="table table-bordered">
 	<tr align="center" id="mo">
 	  <td align="center" width="3%">
 	   <img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor:pointer;" onclick="muestra_tabla(document.all.prueba_vida,2);" >
@@ -1322,11 +1324,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>No Conformidades</b> &nbsp&nbsp
 	   <?$ref =encode_link("../calidad/detalle_no_conformes.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>">
+	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
-</table></td></tr>
-<tr><td><table id="prueba_vida" border="1" width="100%" style="display:none;border:thin groove"align="center">
+</table>
+<table id="prueba_vida" border="1" width="100%" style="display:none;border:thin groove"align="center"class="table table-bordered">
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
@@ -1387,7 +1389,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	 		<?$res_comprobante->movenext();
 	 	}
 	 }?>
-</table></td></tr>
+</table>
 <?}?>
 
 <?if ($id_registro){//pac pap
@@ -1397,8 +1399,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 			where id_registro='$id_registro'
 			ORDER BY id_pac_pap DESC";
 $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pagina();?>
-<br>
-<tr><td><table width="100%" class="bordes" align="center">
+<table width=100% align="center" class="table table-bordered">
 	<tr align="center" id="mo">
 	  <td align="center" width="3%">
 	   <img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor:pointer;" onclick="muestra_tabla(document.all.prueba_vida2,2);" >
@@ -1407,11 +1408,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Planes de Accion</b> &nbsp&nbsp
 	   <?$ref =encode_link("../calidad/pac_pap.php", array("id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>">
+	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
-</table></td></tr>
-<tr><td><table id="prueba_vida2" border="1" width="100%" style="display:none;border:thin groove"align="center">
+</table>
+<table class="table table-bordered" id="prueba_vida2" border="1" width="100%" style="display:none;border:thin groove"align="center">
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
@@ -1470,7 +1471,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	 		<?$res_comprobante->movenext();
 	 	}
 	 }?>
-</table></td></tr>
+</table>
 <?}?>
 
 <?if ($id_registro){//memo
@@ -1479,8 +1480,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 			where id_registro='$id_registro'
 			ORDER BY id_memo DESC";
 $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pagina();?>
-<br>
-<tr><td><table width="100%" class="bordes" align="center">
+<table width=100% align="center" class="table table-bordered">
 	<tr align="center" id="mo">
 	  <td align="center" width="3%">
 	   <img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor:pointer;" onclick="muestra_tabla(document.all.prueba_vida3,2);" >
@@ -1489,11 +1489,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Memo</b> &nbsp&nbsp
 	   <?$ref =encode_link("./memo.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>">
+	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
-</table></td></tr>
-<tr><td><table id="prueba_vida3" border="1" width="100%" style="display:none;border:thin groove"align="center">
+</table>
+<table class="table table-bordered" id="prueba_vida3" border="1" width="100%" style="display:none;border:thin groove"align="center">
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
@@ -1554,7 +1554,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	 		<?$res_comprobante->movenext();
 	 	}
 	 }?>
-</table></td></tr>
+</table>
 <?}?>
 
 <?if ($id_registro){//audit
@@ -1563,8 +1563,8 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 			where id_registro='$id_registro'
 			ORDER BY id_informe_ace DESC";
 $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pagina();?>
-<br>
-<tr><td><table width="100%" class="bordes" align="center">
+
+<table width=100% align="center" class="table table-bordered">
 	<tr align="center" id="mo">
 	  <td align="center" width="3%">
 	   <img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor:pointer;" onclick="muestra_tabla(document.all.prueba_vida4,2);" >
@@ -1573,11 +1573,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Informes ACE</b> &nbsp&nbsp
 	   <?$ref =encode_link("./inf.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>">
+	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
-</table></td></tr>
-<tr><td><table id="prueba_vida4" border="1" width="100%" style="display:none;border:thin groove"align="center">
+</table>
+<table class="table table-bordered" id="prueba_vida4" border="1" width="100%" style="display:none;border:thin groove"align="center">
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
@@ -1639,13 +1639,12 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	 		<?$res_comprobante->movenext();
 	 	}
 	 }?>
-</table></td></tr>
+</table>
 <?}?>
 
-<br>
 <?if ($id_registro){//archivo?>
-<table border="1" cellspacing="0" bgcolor="<?=$bgcolor3?>" width="90%" align="center">
-			<tr>
+<table width=100% align="center" class="table table-bordered">
+			<tr id="mo">
 				<td align="center" colspan="5">
 				<?$sql_archivos="select * from registro.archivos where id_registro=$id_registro";
 				$rta_archivos=sql($sql_archivos) or fin_pagina();?>
@@ -1653,7 +1652,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 				<?
 				
 ?>
-					<input type="button" name="bagregar" value="Agregar" onclick="if (typeof(warchivos)=='object' && warchivos.closed || warchivos==false) warchivos=window.open('<?= encode_link('./archivos_subir.php',array("id_registro"=>$id_registro, "user"=>$_ses_user["name"], "onclickaceptar"=>"window.self.focus();", "proc_file"=>"./orden_file_proc.php")) ?>','','toolbar=0,location=0,directories=0,status=0, menubar=0,scrollbars=1'); else warchivos.focus()" <?=$new?>>
+					<input class="btn btn-primary" type="button" name="bagregar" value="Agregar" onclick="if (typeof(warchivos)=='object' && warchivos.closed || warchivos==false) warchivos=window.open('<?= encode_link('./archivos_subir.php',array("id_registro"=>$id_registro, "user"=>$_ses_user["name"], "onclickaceptar"=>"window.self.focus();", "proc_file"=>"./orden_file_proc.php")) ?>','','toolbar=0,location=0,directories=0,status=0, menubar=0,scrollbars=1'); else warchivos.focus()" <?=$new?>>
 					
 				</td>	
 			</tr>
@@ -1669,7 +1668,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 			</tr>
 <?
 				while (!$rta_archivos->EOF){
-					echo "<tr style='font-size: 9pt'><td align=center>";
+					echo "<tr class='table table-bordered' style='font-size: 9pt'><td align=center>";
  					if (is_file("../../uploads/archivoscalidad/".$rta_archivos->fields["nombre"])) echo "<a target=_blank href='".encode_link("../archivos/archivos_lista.php", array ("file" =>$rta_archivos->fields["nombre"],"size" => $rta_archivos->fields["size"],"cmd" => "download_plan"))."'>";
 				  echo $rta_archivos->fields["nombre"]."</a></td>";
 		?>    

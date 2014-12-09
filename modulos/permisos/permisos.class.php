@@ -926,8 +926,8 @@ class ArbolOfPermisos extends permiso {
 					$this->removeChild($i);
 				}
 		}
-if ($this->getTipo()==1 && $this->childCount_null() > 0) return true;
-else return false;
+		if ($this->getTipo()==1 && $this->childCount_null() > 0) return true;
+		else return false;
 		return true;
 	}
 		/**
@@ -1093,6 +1093,56 @@ else return false;
 			echo "</item>\n";
 			if ($level==1) echo "<divider id='div_2'/>\n";
 			}
+	}
+	function saveBootstrapMenu($menu, $level=0)
+	{ global $html_root;
+        $item = null;
+
+		if ($level!=0)
+		{
+			if ($this->getTipo()==2 || $this->getTipo()==1)
+			{
+				$parametros=array();
+				$pagina=$this->name; 
+			
+				$div=split("\?",$pagina);
+				$page=$div[0].".php";
+				if ($div[1]) 
+				{
+					$page.="?".$div[1];
+				}
+				if ($this->dir != "") {
+			    	$lnk="/modulos/".$this->dir."/".$page;
+			    }
+			    else {
+			    	$lnk='';
+			    }
+                $item = $menu->add($this->desc, $lnk);
+			}
+		}
+
+		if ($this->childCount() > 0)
+		{
+			for ($i=0; $i < $this->childCount(); $i++)
+			{
+				if ($this->childs[$i] == null) 
+				{
+					continue;
+				}
+				//si es tipo paginaFuera o permiso, lo salteo
+				if ($this->childs[$i]->getTipo()==3 || $this->childs[$i]->getTipo()==4)
+				{
+					continue;
+				}
+                if (is_null($item)) {
+                    $item = $this->childs[$i]->saveBootstrapMenu($menu, $level+1);
+                }
+                else {
+                    $item = $this->childs[$i]->saveBootstrapMenu($item, $level+1);
+                }
+			}
+		}
+        return $menu;
 	}
 	/**
 	 * Carga el id del permiso padre en caso de q el permiso ya exista
@@ -1435,7 +1485,7 @@ class HTMLArbolPermisos extends HtmlBaseClass
 	function insertScripts()
 	{
 		global $html_root;
-		echo "<link rel='STYLESHEET' type='text/css' href='$html_root/lib/dhtmlXTree.css'>\n";
+		//echo "<link rel='STYLESHEET' type='text/css' href='$html_root/lib/dhtmlXTree.css'>\n";
 		echo "<script  src='$html_root/lib/dhtmlXCommon.js'></script>";
 		echo "<script  src='$html_root/lib/dhtmlXTree.js'></script>";
 		echo "<script  src='$html_root/lib/dhtmlXProtobar.js'></script>";

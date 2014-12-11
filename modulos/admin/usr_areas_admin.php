@@ -53,190 +53,94 @@ echo $html_header;
 
 ?>
 <script>
-var img_ext='<?=$img_ext = '../../imagenes/rigth2.gif'?>';//imagen extendido
-var img_cont='<?=$img_cont = '../../imagenes/down2.gif'?>';//imagen contraido
-
-function muestra_tabla(obj_tabla,nro){
- oimg=eval("document.all.imagen_"+nro);//objeto tipo IMG
- if (obj_tabla.style.display=='none'){
- 	obj_tabla.style.display='inline';
-    oimg.show=0;
-    oimg.src=img_ext;
- }
- else{
- 	obj_tabla.style.display='none';
-    oimg.show=1;
-	oimg.src=img_cont;
- }
-}//termina muestra tabla
-
-//---------------------fin scrip para provincia---------------------------
 </script>
-<form name='form1' action='usr_areas_admin.php' method='POST'>
-<input type="hidden" value="<?=$id_usuario?>" name="id_usuario">
+<?php echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";?>
+<div class="newstyle-full-container">
+	<form name='form1' action='usr_areas_admin.php' method='POST'>
+		<input type="hidden" value="<?=$id_usuario?>" name="id_usuario">
 
-<?
-echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";
-?>
-<table width="85%" cellspacing=0 border='1' align="center" bgcolor='<?=$bgcolor_out?>'>
-	<tr id="mo">
-		<td>
-    		<?if (! $id_usuario) {?>  
-    			<font size=+1><b>Nuevo Dato</b></font>   
-    		<?} 
-    		else {?>
-       		 <font size=+1><b><?=$login?></b></font>   
-        	<?}?>
-       
-    </td>
-	</tr>
-	<tr>
-		<td>
-		<table width=90% align="center" border='1'>
-			<tr>
-				<td id=mo colspan="2"><b> Usuario</b></td>
-			</tr>
-			<tr>
-				<td>
-				<table>
-					<tr>
-						<td align="center" colspan="2">
-							<b> ID Usuario: 
-							<font size="+1" color="Red"> 
-								<?=($id_usuario) ? $id_usuario : "Nuevo Dato"?>
-							</font></b>
-						</td>
-					</tr>
-					
-					<tr>
-						<td align="right"><b>Login:</b></td>
-						<td align='left'>
-							<input type="text" size="40" value="<?=$login;?>"name="login" disabled>
-						</td>
-					</tr>
-				</table>
-				</td>
-			</tr>
-					
- <?if ($id_usuario) {?>
-  
- 	<tr>
-				<td>
-				<table width="100%" class="bordes" align="center">
-					<tr align="center" id="mo">
-						<td align="center"><b>Agregar Area</b></td>
-					</tr>
-
-					<tr>
-						<td>
-						<table width="100%" align="center">
-							<tr>
-								<td align="right"><b>Areas:</b></td>
-								<td align='left'>
-									<select multiple name="cuie[]" Style=""
-										size="20" onKeypress="buscar_combo(this);"
-										onblur="borrar_buffer();" onchange="borrar_buffer();">
-									
-			  						<?
-										$sql = "select * from expedientes.areas order by desc_area";
-										$res_efectores = sql ( $sql ) or fin_pagina ();
-										while ( ! $res_efectores->EOF ) {
-											$cuiel = $res_efectores->fields ['id_area'];
-											$nombre_efector = $res_efectores->fields ['desc_area'];?>
-										<option value='<?=$cuiel?>'><?=$nombre_efector?></option>
-			    					<?$res_efectores->movenext ();
-									}	
-									?>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td align="center" colspan="5" class="bordes">
-									<input type="submit" name="guardar_provincia" value="Guardar" title="Guardar" style='width:130px;height:25px'>
-								</td>
-							</tr>
-
-						</table>
-						</td>
-					</tr>
-				</table>
-				</td>
-			</tr>
-		
+		<? 
+			if($accion) {
+		?>
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<?= $accion ?>
+			</div>
+		<? 
+			}
+		?>
+		<legend>Agregar Provincia</legend>
+		<div>
+			<p><strong>Usuario:</strong> <?= (!$id_usuario)? "Nuevo" : $login ?></p>
+			<p><strong>ID Usuario:</strong> <?= ($id_usuario)? $id_usuario : "Nuevo"?></p>
+		</div>
 	
- <? //--------------------- lista efectores------------------------------		?>
+		<div class="row-fluid">
+					
+ 		<?if ($id_usuario) {?>
+ 			<div class="span6">
+				<legend>Areas</legend> 
+										<select style="width: 100%; height: 150px; margin-bottom: 10px;" multiple name="cuie[]" 
+										onKeypress="buscar_combo(this);"	onblur="borrar_buffer();" onchange="borrar_buffer();">
+											<?php
+											$sql = "select * from expedientes.areas order by desc_area";
+											$res_efectores = sql ( $sql ) or fin_pagina ();
+											while ( ! $res_efectores->EOF ) {
+												$cuiel = $res_efectores->fields ['id_area'];
+												$nombre_efector = $res_efectores->fields ['desc_area'];?>
+												<option value='<?=$cuiel?>'><?=$nombre_efector?></option>
+												<?$res_efectores->movenext ();
+											}?>
+										</select>
 
-		
-			 
-	<tr>
-				<td>
-				<table width="100%" align="center">
-					<tr align="center" id="mo">
-						<td align="center" width="3%">
-							<img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor: pointer;"
-							onclick="muestra_tabla(document.all.prueba_vida,2);">
-						</td>
-						<td align="center"><b>Areas Relacionados</b></td>
-					</tr>
-
-				</table>
-				</td>
-			</tr>
-
-
-			<tr>
-				<td>
-				<table id="prueba_vida" border="1" width="100%" style="display: none; border: thin groove">
+										<div>											
+											<input class="btn btn-primary pull-right" type="submit" name="guardar_provincia" value="Guardar" title="Guardar">
+										</div>
+			</div>
+  			<div class="span6">
+				<legend>Areas Relacionadas</legend>
+					<table class="table table-condensed table-bordered table-hover">
 					<?$query = "select expedientes.areas.desc_area, expedientes.usu_area.id_usu_area
 					from expedientes.areas 
 					join expedientes.usu_area on (expedientes.areas.id_area = expedientes.usu_area.id_area) 
 			        join sistema.usuarios on (expedientes.usu_area.id_usuario = sistema.usuarios.id_usuario) 
 			        where sistema.usuarios.id_usuario = '$id_usuario' order by areas.desc_area";
-		
 					$res_comprobante = sql ( $query, "<br>Error al traer los comprobantes<br>" ) or fin_pagina ();
-				if ($res_comprobante->RecordCount () == 0) {?>
-				 	<tr>
-						<td align="center"><font size="2" color="Red"><b>No existe ninguna Areas relacionado con este Usuario</b></font></td>
-					</tr>
-				 <?} 
-				 else {?>
-					 	<tr id="sub_tabla">
-							<td width="20%">Area</td>
-							<td width=1%>Borrar</td>
-
+			
+					if ($res_comprobante->RecordCount () == 0) {?>
+					 	<tr>
+							<td >
+								<b>No existe ningun Area relacionado con este Usuario</b>
+							</td>
 						</tr>
+				 	<?} 
+				 	else {?>
+				 		<thead>
+							<tr>
+								<th>Area</th>
+								<th>Borrar</th>
+							</tr>
+						</thead>					 	
 						<?$res_comprobante->movefirst ();
 						while ( ! $res_comprobante->EOF ) {?>
-							<tr <?=atrib_tr ()?>>
+							<tr>
 								<td><?=$res_comprobante->fields ['desc_area']?></td>
 								<?$ref = encode_link ( "usr_areas_admin.php", array ("id_usu_area" => $res_comprobante->fields ['id_usu_area'], "borra_efec" => "borra_efec", "id_usuario" => $id_usuario ) );
 								$onclick_provincia = "if (confirm('Seguro que desea eliminar el Area?')) location.href='$ref'";?>
-								<td align="center">
-									<img src='../../imagenes/sin_desc.gif'style='cursor: pointer;' onclick="<?=$onclick_provincia?>">
-								</td>
+								<td align="center"><a href="#" onclick="<?=$onclick_provincia?>"><i class="icon-trash"></i> Eliminar</a></td>
 							</tr>
 							<?$res_comprobante->movenext ();
 						} // fin while
 					}?>	 	
-		</table>
-		</td>
-		</tr>
-		<?php } ?> 
-			<tr>
-				<td>
-				<table width=100% align="center">
-					<tr align="center">
-						<td>
-							<input type=button name="volver" value="Volver" onclick="document.location='usr_areas_listado.php'" title="Volver al Listado" style='width:130px;height:25px'>
-							</td>
-					</tr>
-				</table>
-				</td>
-			</tr>
-		</table>
-		</td>
-		</tr>
-</table>
-</form>
+					</table>
+			</div>
+		<?php } ?>
 
+		</div> 
+
+		<div class="form-actions">
+			<input class="btn btn-info btn-large" type='button' name="volver" value="Volver" onclick="document.location='usr_areas_listado.php'" title="Volver al Listado">
+		</div>
+	</form>
+</div>
 <?=fin_pagina ();// aca termino ?>

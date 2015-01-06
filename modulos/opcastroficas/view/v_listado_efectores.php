@@ -1,0 +1,61 @@
+<?php
+function drawView(){
+	global $mock;
+	global $result;
+	?>
+	<table border=0 width=50% cellspacing=2 cellpadding=2 bgcolor='<?=$bgcolor3?>' align=center>
+	  <tr>
+	  	<td colspan=12 align=left id=ma>
+	     <table width=100%>
+	      <tr id=ma>
+	       <td width=30% align=left><b>Total:</b> <?=$total_pais?></td>       
+	       <td width=40% align=right><?=$link_pagina?></td>
+	      </tr>
+	    </table>
+	   </td>
+	  </tr>
+	  <tr>
+	    <td align=right id=mo><a id=mo href='<?=encode_link("./view/v_listado_efectores.php",array("sort"=>"1","up"=>$up))?>' >Código</a></td>      	
+	    <td align=right id=mo><a id=mo href='<?=encode_link("./view/v_listado_efectores.php",array("sort"=>"2","up"=>$up))?>' >Descripción</a></td>      	
+		<td align=right id=mo><a id=mo href='<?=encode_link("./view/v_listado_efectores.php",array("sort"=>"2","up"=>$up))?>' >Provincia</a></td>      	
+		<td align=right id=mo><a id=mo href='<?=encode_link("./view/v_listado_efectores.php",array("sort"=>"2","up"=>$up))?>' >Email</a></td>      	
+		<td align=right id=mo><a id=mo href='<?=encode_link("./view/v_listado_efectores.php",array("sort"=>"2","up"=>$up))?>' >Telefono</a></td>      	
+	  </tr>
+		<?
+		if($mock == false){
+			while (!$result->EOF) {
+				$ref = encode_link("./formulario_efector.php",array("id_efector"=>$result->fields['id_efector'],"pagina"=>"listado_efectores"));
+				$onclick_elegir="location.href='$ref'";
+				if (permisos_check(permisis_notof_celular,'')){}
+		?>
+		    <tr <?=atrib_tr()?>>     
+		     <td onclick="<?=$onclick_elegir?>"><?=$result->fields['login']?></td>
+		     <td onclick="<?=$onclick_elegir?>"><?=$result->fields['apellido'].', '.$result->fields['nombre']?></td>
+			 <td onclick="<?=$onclick_elegir?>"><?=$result->fields['apellido']?></td>
+			 <td onclick="<?=$onclick_otro?>"><?=$result->fields['apellido']?></td>
+		    </tr>    
+			<?$result->MoveNext();
+			}
+		} else {
+			$i = 0;
+			while($i < count($result)){
+				$ref = encode_link("./formulario_efector.php",array("id_efector"=>$result[$i]['id_efector'],"pagina"=>"listado_efectores"));
+				$onclick_elegir="location.href='$ref'";
+		
+				?>
+				<tr <?=atrib_tr()?>>     
+					<td onclick="<?=$onclick_elegir?>"><?=$result[$i]['id_efector']?></td>
+					<td onclick="<?=$onclick_elegir?>"><?=$result[$i]['descripcion']?></td>
+					<td onclick="<?=$onclick_elegir?>"><?=$result[$i]['provincia']?></td>
+					<td onclick="<?=$onclick_elegir?>"><?=$result[$i]['email']?></td>
+					<td onclick="<?=$onclick_elegir?>"><?=$result[$i]['telefono']?></td>
+				</tr>    
+				<?
+				$i++;
+			}
+		}
+		?>
+	</table>
+<?
+}
+?>

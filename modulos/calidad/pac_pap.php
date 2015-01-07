@@ -246,6 +246,7 @@ if(($parametros['pagina']=="listado")or($pagina_viene=="plan_admin"))
 }//de if($parametros['pagina']=="listado")
 
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 ?>
 <SCRIPT language='JavaScript' src="../../lib/funciones.js">
 </script>
@@ -322,7 +323,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
 <input type="hidden" name="pagina_viene" value="<?=$pagina_viene?>">
 <input type="hidden" name="pagina" value="<?=$parametros['pagina']?>">
 
- <table width="90%"  border="1" align="center" cellpadding="4" bgcolor='<?=$bgcolor_out?>'>
+ <table width="90%"  border="1" align="center" cellpadding="4" class="table table-bordered">
     <tr id=mo>
       <td colspan="3">
         P.A.C/P.A.P
@@ -392,7 +393,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
     <input type=text name='fecha_g_desc' value="<?=date("d/m/Y")?>" size=10 readonly>
 	<?=link_calendario("fecha_g_desc");?>
    <?}?>
-    <input type="submit" name="boton" value="Guardar Registro" onclick="return control_datos('descripcion');">
+    <input class="btn btn-primary" type="submit" name="boton" value="Guardar Registro" onclick="return control_datos('descripcion');">
    </div>
    
    <table width="100%">
@@ -406,7 +407,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
     <td>
      <?$ref=encode_link("pac_pap_actualiza_log.php",array("id_log"=>$log_desc[$i]['id_log']));?>
      <?if ($ver_mod=="si"){?>
-     	<input type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">
+     	<input class="btn btn-primary" type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">
      <?}?>
     </td>
    
@@ -447,7 +448,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
    	<input type=text name='fecha_g_ac' value="<?=date("d/m/Y")?>" size=10 readonly>
 	<?=link_calendario("fecha_g_ac");?>
    <?}?>
-	<input type="submit" name="boton" value="Guardar Acción Correctiva" onclick="return control_datos('accion_correctiva')">
+	<input class="btn btn-primary" type="submit" name="boton" value="Guardar Acción Correctiva" onclick="return control_datos('accion_correctiva')">
    </div>
    
    <table width="100%">
@@ -461,7 +462,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
      <td>
      <?$ref=encode_link("pac_pap_actualiza_log.php",array("id_log"=>$log_ac[$i]['id_log']));?>
      <?if ($ver_mod=="si"){?>
-     <input type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
+     <input class="btn btn-primary" type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
      <?}?>
     </td>
     
@@ -539,7 +540,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
         	<input type=text name='fecha_g_v' value="<?=date("d/m/Y")?>" size=10 readonly>
 			<?=link_calendario("fecha_g_v");?>
 			<?}?>
-           <input type=submit name="boton" value="Guardar Verificación" onclick="return control_datos('verificacion');">
+           <input class="btn btn-primary" type=submit name="boton" value="Guardar Verificación" onclick="return control_datos('verificacion');">
         </td>
       </tr>
      </table>
@@ -558,7 +559,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
 		  <td>
      		<?$ref=encode_link("pac_pap_actualiza_log.php",array("id_log"=>$log_ve[$i]['id_log']));?>
      		<?if ($ver_mod=="si"){?>
-     		<input type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
+     		<input class="btn btn-primary" type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
      		<?}?>
     	  </td>   
     	 
@@ -597,7 +598,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
     <input type=text name='fecha_g_ee' value="<?=date("d/m/Y")?>" size=10 readonly>
 	<?=link_calendario("fecha_g_ee");?>
    <?}?>
-    <input type="submit" name="boton" value="Guardar Evaluación de Eficacia" <?=$dis_ee?> onclick="return control_datos('evaluacion_eficacia')">
+    <input class="btn btn-primary" type="submit" name="boton" value="Guardar Evaluación de Eficacia" <?=$dis_ee?> onclick="return control_datos('evaluacion_eficacia')">
    </div>
    <table width="100%">
    <?
@@ -610,7 +611,7 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
     <td>
      <?$ref=encode_link("pac_pap_actualiza_log.php",array("id_log"=>$log_ee[$i]['id_log']));?>
      <?if ($ver_mod=="si"){?>
-     <input type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
+     <input class="btn btn-primary" type="button" value="$" name="$" onclick="window.open('<?=$ref?>')">     
      <?}?>
     </td>
     
@@ -631,8 +632,8 @@ $link=encode_link("pac_pap.php", array("id"=>$id));
  </tr>
 
 <tr>
-      <td align="center" colspan="4"  id="mo">
-      <input type="button" name="volver" value="Volver" onclick="document.location='listado_pac_pap.php'">
+      <td colspan="4" >
+      <input class="btn btn-info btn-large" type="button" name="volver" value="Volver" onclick="document.location='listado_pac_pap.php'">
       </td>     
 </tr>
 

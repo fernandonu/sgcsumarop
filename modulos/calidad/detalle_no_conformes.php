@@ -79,15 +79,11 @@ case "Guardar":
 default:{
          if($parametros['id']){
           $id=$parametros['id'];
-          $sql="select noconformes.deteccion,noconformes.nro_serie,noconformes.id_tipo_producto,proveedor.razon_social, 
-          proveedor.id_proveedor,noconformes.id_prod_esp,noconformes.fecha_evento,noconformes.usuario,
+          $sql="select noconformes.deteccion,noconformes.nro_serie,noconformes.id_tipo_producto, 
+          noconformes.id_proveedor,noconformes.id_prod_esp,noconformes.fecha_evento,noconformes.usuario,
           noconformes.descripcion_inconformidad,noconformes.id_disposicion,noconformes.area, noconformes.cod_barra , noconformes.id_registro, 
           noconformes.resultado, noconformes.fecha_sol_in,noconformes.requi_incum,noconformes.sol_in,noconformes.met_uti,noconformes.con_cambio,estado_nc
-          from calidad.noconformes 
-          left join general.producto_especifico
-          using (id_prod_esp) 
-          left join general.proveedor 
-          using (id_proveedor) 
+          from calidad.noconformes           
           where noconformes.id_noconforme=$id";
           $resultado=sql($sql,"No se puede Ejecutar la Consulta") or fin_pagina();
           
@@ -106,12 +102,14 @@ default:{
           $met_uti = $resultado->fields['met_uti'];
           $con_cambio = $resultado->fields['con_cambio'];
           $id_registro = $resultado->fields['id_registro']; 
+          $id_proveedor = $resultado->fields['id_proveedor']; 
           $resultado1 = $resultado->fields['resultado'];
           $estado_nc = $resultado->fields['estado_nc'];
          }
          else //inserto nuevo
           extract($_POST);
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 ?>         
 <SCRIPT language='JavaScript' src="../../lib/funciones.js">
 cargar_calendario();
@@ -126,26 +124,13 @@ $link=encode_link("detalle_no_conformes.php", array("pagina"=>$parametros['pagin
 <input type="hidden" name="id" value="<?=$id?>">
 <input type="hidden" name="id_registro" value="<?=$id_registro?>">
 <input type="hidden" name="pagina_viene" value="<?=$pagina_viene?>">
-<table width="90%"  border="1" align="center" bgcolor='<?=$bgcolor_out?>'>
-<?
-$sql="select id_proveedor,razon_social from proveedor order by razon_social";
-$resultado_proveedor=$db->Execute($sql) or die($db->ErrorMsg()."<br>".$sql);
-if($id=="")
-{//nuevo numero
- $sql="select max(id_noconforme) from noconformes";
- $resultado_nuevo=$db->Execute($sql) or die($db->ErrorMsg()."<br>".$sql);
+<table width="90%"  border="1" align="center" class="table table-bordered">
 
- if ($resultado_nuevo->fields['max']=="")
- $id=0;
- else 
-  $id=$resultado_nuevo->fields['max'] + 1;
-} 
-?>
   <tr>
     <td id=mo colspan="4">Detalle de Producto No Conforme</td>
   </tr>
   <tr>  
-    <td colspan="4"><b>Tratamiento de Ocurrencias <?='RG-SGC N TO'.$id.'_03';?></b></td> 
+    <td colspan="4"><b>Tratamiento de Ocurrencias <?='RG-SGC N° TO 0'.$id.'_03';?></b></td> 
   </tr>
 <tr>
 <td>
@@ -169,10 +154,26 @@ $resultado_tipo_prod->MoveNext();
 </select>
 </td>
 <td>
-<strong>Nro de Registro de No Conformidad ó Producto No Conforme</strong>
+<strong>Categorias</strong>
 </td>
 <td>
-<input type="text" name="nro_serie" value="<?=$nro_serie;?>">
+      <select name='id_proveedor' Style="width:200px" 
+            onKeypress="buscar_combo(this);"
+        onblur="borrar_buffer();"
+        onchange="borrar_buffer();">
+        <option value="-1">Seleccione</option>
+       <?
+       $sql= "select * from calidad.categorias_ocurrencias order by desc_cat_ocu";
+       $res=sql($sql) or fin_pagina();
+      
+       while (!$res->EOF){ 
+          $id_select=$res->fields['id_categorias_ocurrencias'];
+          $descripcion=$res->fields['desc_cat_ocu'];?>
+        <option value='<?=$id_select?>' <?if ($id_proveedor==$id_select) echo "selected"?> ><?=$descripcion?></option>
+          <?
+          $res->movenext();
+          }?>
+      </select>      
 </td>
 </tr>
 <tr>
@@ -185,11 +186,20 @@ $resultado_tipo_prod->MoveNext();
      <td><strong>Área</strong></td>
      <td colspan="3"><input type="text" name="area" value="<?=$area?>" style="size:50"></td>
 </tr>
+
+     <tr>
+     <td colspan="4" align="center">
+      <br>
+       <strong>Varios</strong><br>
+      <textarea name="requi_incum" style="margin: 0px; width: 1258px; height: 40px;" ><?=$requi_incum?></textarea>
+     </td>
+    </tr>
+
    <tr>
      <td colspan="4" align="center">
       <br>
        <strong>Detalle de la No Conformidad/PNC</strong><br>
-  		<textarea name="texto_deteccion" cols="80" rows="4"><?=$texto_deteccion?></textarea>
+  		<textarea name="texto_deteccion" style="margin: 0px; width: 1258px; height: 90px;"><?=$texto_deteccion?></textarea>
   	 </td>
   	</tr>
       <tr>
@@ -212,26 +222,21 @@ $resultado_tipo_prod->MoveNext();
     	 <strong>Fecha de correción/solución inmediata</strong>
       <input type="text" name="fecha_sol_in" value="<?=$fecha_sol_in?>">&nbsp;<? cargar_calendario(); echo link_calendario("fecha_sol_in"); ?>
       </td>
-   	</tr>	 	
+   	</tr>	 
+    	
     <tr>
      <td colspan="4" align="center">
       <br>
        <strong>Causa</strong><br>
-  		<textarea name="descripcion_inconformidad" cols="80" rows="4"><?=$descripcion_inconformidad?></textarea>
+  		<textarea name="descripcion_inconformidad" style="margin: 0px; width: 1258px; height: 90px;" rows="4"><?=$descripcion_inconformidad?></textarea>
   	 </td>
-     <!--
-     <tr>
-     <td colspan="4" align="center">
-      <br>
-       <strong>Requisito incumplido</strong><br>
-      <textarea name="requi_incum" cols="80" rows="4"><?=$requi_incum?></textarea>
-     </td>
-    </tr>-->
+     </tr>
+
     <tr>
      <td colspan="4" align="center">
       <br>
        <strong>Solución Inmediata/Corrección</strong><br>
-      <textarea name="sol_in" cols="80" rows="4"><?=$sol_in?></textarea>
+      <textarea name="sol_in" style="margin: 0px; width: 1258px; height: 90px;" rows="4"><?=$sol_in?></textarea>
      </td>
     </tr>
     <!--<tr>
@@ -246,24 +251,24 @@ $resultado_tipo_prod->MoveNext();
      <td colspan="4" align="center">
       <br>
        <strong>Verificación / Control de Cambios</strong><br>
-      <textarea name="con_cambio" cols="80" rows="4"><?=$con_cambio?></textarea>
+      <textarea name="con_cambio" style="margin: 0px; width: 1258px; height: 90px;" rows="4"><?=$con_cambio?></textarea>
      </td>
     </tr>
 	 <tr>
      <td colspan="4" align="center">
       <br>
        <strong>Resultado</strong><br>
-  		<textarea name="resultado" cols="80" rows="4"><?=$resultado1?></textarea>
+  		<textarea name="resultado" style="margin: 0px; width: 1258px; height: 90px;" rows="4"><?=$resultado1?></textarea>
   	 </td>
   	</tr>
 <tr>
-      <td align="center" colspan="4"  id="mo">
-        <input type="submit" name="boton" value='Guardar' <?=($estado_nc==2)?'disabled':'';?>>
+      <td align="center" colspan="4">
+        <input class="btn btn-primary" type="submit" name="boton" value='Guardar' <?=($estado_nc==2)?'disabled':'';?>>
         <input type="hidden" name="ie" value='<?if($parametros['pagina']!="listado")echo "Insertar"; else echo "Editar"?>'>
         <?if ($pagina_viene=='plan_admin'){?>
-        <input type="button" name="boton" value='Volver' onclick="document.location='../registro/plan_listado.php'">
+        <input class="btn btn-info btn-large" type="button" name="boton" value='Volver' onclick="document.location='../registro/plan_listado.php'">
         <?}else{?>
-        <input type="button" name="boton" value='Volver' onclick="document.location='no_conformes.php'">
+        <input class="btn btn-info btn-large" type="button" name="boton" value='Volver' onclick="document.location='no_conformes.php'">
         <?}?>
       </td>     
 </tr>

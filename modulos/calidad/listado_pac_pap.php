@@ -53,6 +53,7 @@ $datos_barra = array(
 				 );
 generar_barra_nav($datos_barra);
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 
 if($cmd!="estadisticas")//funciona como antes.....
 {?>
@@ -118,7 +119,7 @@ elseif($cmd=="pap")$where_tmp=" pac_pap.tipo=1";?>
 <?$result=sql($sql) or die;?>
 <?=$msg;?>
 
-<table border=0 width=95% cellspacing=2 cellpadding=2 bgcolor='<?=$bgcolor3?>' align=center>
+<table border=0 width=95% cellspacing=2 cellpadding=2 class="table table-striped table-advance table-hover" align=center>
   <tr>
   	<td colspan=12 align=left id=ma>
      <table width=100%>

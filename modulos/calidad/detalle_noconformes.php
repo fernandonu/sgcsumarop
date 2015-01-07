@@ -83,6 +83,7 @@ default:{
          else //inserto nuevo
           extract($_POST);
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 ?>         
 <SCRIPT language='JavaScript' src="../../lib/funciones.js">
 cargar_calendario();

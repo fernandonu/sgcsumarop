@@ -1,12 +1,5 @@
 <?
-/*
-Autor:  CarlitoX
-Creado: viernes 06/08/04
-MODIFICADA POR
-$Author: gabriel $
-$Revision: 1.2 $
-$Date: 2005/09/06 13:55:46 $
-*/
+
 $id_registro=$parametros['id_registro'];
 $user=$parametros['user'];
 if ($_POST['baceptar']){

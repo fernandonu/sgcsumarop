@@ -42,6 +42,7 @@ td {
 	color: #cccccc;
 	font-weight: bold;
 	text-align: center;
+	height:30px;
 }
 #mo_sf {
 	background-color: #006699;
@@ -111,6 +112,7 @@ td {
 	color: #006699;
 	font-weight: bold;
 	text-align: center;
+	height:30px;
 }
 #celda_detalle {
 	background-color: #FFFFFF;
@@ -147,6 +149,7 @@ td {
 	color: #006699;
 	font-weight: bold;
 	text-align: center;
+	height:30px;
 }
 #ma2 a {
 	background-color: #cccccc;
@@ -450,3 +453,28 @@ td {
 	FONT-FAMILY: Arial, Helvetica;
 	border: 1px solid #000000;
 }
+
+				
+
+				.input_container 
+				{					
+					float: left;
+				}
+				.input_container input {					
+					border-radius: 0;
+				}
+				.input_container ul {					
+					position: absolute;
+					z-index: 9;
+					background: #f3f3f3;
+					list-style: none;
+				}
+				.input_container ul li {
+					padding: 2px;
+				}
+				.input_container ul li:hover {
+					background: #eaeaea;
+				}
+				#country_list_id {
+					display: none;
+				}

@@ -53,7 +53,6 @@ function tiempo_de_carga () {
 }
 // Funcion que verifica el estado de la sesión
 function Autenticar() {
-//    global $bgcolor1;
 	$status = phpss_auth();
 
 	switch($status) {
@@ -668,49 +667,9 @@ function html_out($outstr){
 //function uev_out($outstr){return ereg_replace("'","&#39;",htmlspecialchars(urlencode($outstr)));}
 
 
-function atrib_tr($bgcolor_out_int='#F2EFFB'){
+function atrib_tr($bgcolor_out_int='#E2E9F0'){
   global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-		 
-function atrib_tr1($bgcolor_out_int='#F3F781'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-         
-function atrib_tr2($bgcolor_out_int='#F78181'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-		 
-function atrib_tr3($bgcolor_out_int='D7D5FA'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-		 
-function atrib_tr4($bgcolor_out_int='F5A1F1'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-		 
-function atrib_tr5($bgcolor_out_int='FC5D4F'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-         
-function atrib_tr6($bgcolor_out_int='#81BEF7'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-         
-function atrib_tr7($bgcolor_out_int='#F5D0A9'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
-         }
-		 
-function atrib_tr8($bgcolor_out_int='#00FF00'){
-  global $bgcolor_over, $text_color_over, $text_color_out ;
-  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand;'";
+  return "bgcolor=$bgcolor_out_int onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out_int'; this.style.color = '$text_color_out'\"; style='cursor: hand; height:35px;'";
          }
 
 
@@ -2274,9 +2233,9 @@ function elimina_repetidos($entrada,$retorna_en=1)
 function isIPIn($ip,$net,$mask) {
    $lnet=ip2long($net);
    $lip=ip2long($ip);
-   $binnet=str_pad( decbin($lnet),32,"0",STR_PAD_LEFT);
+   $binnet=str_pad( decbin($lnet),32,"0","STR_PAD_LEFT" );
    $firstpart=substr($binnet,0,$mask);
-   $binip=str_pad( decbin($lip),32,"0",STR_PAD_LEFT);
+   $binip=str_pad( decbin($lip),32,"0","STR_PAD_LEFT" );
    $firstip=substr($binip,0,$mask);
    return(strcmp($firstpart,$firstip)==0);
 }

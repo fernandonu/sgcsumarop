@@ -9,9 +9,9 @@ $f_venc=fecha_db($_POST['venc']).' '.$hora;
 $mensaje=$_POST['nota'];
 $finicio=date("Y-m-d H:i:s");
 $tipo_m=$_POST['tipo_m'];//me fijo si es nuevo mensaje o se redirige
-$sql="select nombre, apellido from usuarios where login='".$_ses_user['login']."';";
+$sql="select nombre from usuarios where login='".$_ses_user['login']."';";
 $result=$db->Execute($sql) or die($db->ErrorMsg());
-$user_n=$result->fields['nombre'].' '.$result->fields['apellido'];
+$user_n=$result->fields['nombre'];
 $user=$_ses_user['login'];
 //Consulto en BD para almacenar el login del destinatario en vez del nombre
 $para=$_POST['para'];
@@ -38,7 +38,6 @@ $ssql_tit="select titulo from tipo_de_mensaje where tipo1='MCP' and tipo2='".$ti
 db_tipo_res('a');
 $result1=$db->Execute($ssql_tit) or die($db->ErrorMsg());
 $tit=$result1->fields['titulo'].' '.$user_n;
-
 if($para=='Todos'){
 	 $ssq_todos="select login from usuarios where nombre!='root';";
 	 db_tipo_res('a');

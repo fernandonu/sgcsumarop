@@ -1,16 +1,8 @@
 <?
-/*AUTOR: MAC
-
-$Author: mari $
-$Revision: 1.4 $
-$Date: 2007/01/03 13:59:39 $
-*/
-
 require_once("../../config.php");
 echo $html_header;
 $msg=$parametros['msg'];
 
-//$up=$_POST["up"] or $up=$_GET["up"];
 if($_POST['boton']=="Borrar")
 {               $db->StartTrans();
  	            $i=1;$bien=1;
@@ -30,11 +22,10 @@ if($_POST['boton']=="Borrar")
 }//del if de borrar
 
 $orden = array(
-		"default" => "3",
+		"default" => "1",
     "default_up" => "0",
-		"1" => "noconformes.fecha_evento",
-		"2" => "noconformes.descripcion_inconformidad",
-    "3" => "noconformes.id_noconforme"
+    "1" => "noconformes.id_noconforme",
+		"2" => "noconformes.fecha_evento"    
 	);
 
 $filtro = array(
@@ -42,47 +33,48 @@ $filtro = array(
 
 	);
 
-$query="select id_noconforme,descripcion_inconformidad,fecha_evento, estado_nc from noconformes";
+$query="select * from noconformes";
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 ?>
-<script>
-</script>
+<div class="newstyle-full-container">
 <form name="form1" method="post" action="no_conformes.php">
-<table cellspacing=2 cellpadding=2 border=0 width=100% align=center>
-     <tr>
-      <td align=center>
-		<?list($sql,$total_muletos,$link_pagina,$up) = form_busqueda($query,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
-	    &nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'>
-		&nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="document.location='detalle_no_conformes.php'">
-		&nbsp;&nbsp;<input type="submit" name="boton" value="Borrar">
-	  </td>
-     </tr>
-</table>
+
+  <div class="row-fluid" >
+        <div class="span12" align="center">
+          <?list($sql,$total_muletos,$link_pagina,$up) = form_busqueda($query,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
+          <input class="btn" type=submit name="buscar" value='Buscar'>
+          <input class="btn" type="button" name="boton" value='Agregar Nuevo' onclick="document.location='detalle_no_conformes.php'">
+          <input class="btn" type="submit" name="boton" value="Borrar">
+     </div>
+  </div>
+
 <?$resultado=sql($sql) or die;?>
 
-<br>
-<?=$msg?>
+<?php if ($msg){?>
+<div class="alert alert-info" align="center">
+  <b>INFORMACION!</b> <?=$msg?>.
+</div>
+<?php }?>
 
-<table border=0 width=100% cellspacing=2 cellpadding=2 bgcolor='<?=$bgcolor3?>' align=center>
-  <tr>
-  	<td colspan=12 align=left id=ma>
-     <table width=100%>
-      <tr id=ma>
-       <td width=30% align=left><b>Total:</b> <?=$total_muletos?></td>       
-       <td width=40% align=right><?=$link_pagina?></td>
-      </tr>
-    </table>
-   </td>
-  </tr>
+<hr>
+  <div class="pull-right paginador">
+      <?=$total_muletos?> Registros.
+      <?=$link_pagina?>
+  </div>
   
-    <tr>
-      <td width="1%" id=mo></td>
-      <td width="10%" align="center" id=mo><a id=mo href='<?=encode_link($_SERVER["PHP_SELF"],array("sort"=>"3","up"=>$up))?>'><b>Id</b></a> </td>
-      <td width="10%" align="center" id=mo><a id=mo href='<?=encode_link($_SERVER["PHP_SELF"],array("sort"=>"1","up"=>$up))?>'><b>Fecha Evento</b></a></td>
-      <td width="70%" align="center" id=mo><a id=mo href='<?=encode_link($_SERVER["PHP_SELF"],array("sort"=>"2","up"=>$up))?>'><b>Descripción</b></a></td>
-      <td width="10%" align="center" id=mo><b>Revisado</b></td>
-      <td width="10%" align="center" id=mo><b>Aprobado</b></td>
-    </tr>
+  <table class="table table-striped table-advance table-hover">
+    <thead>
+      <tr>
+        <th width="1%" ></th>
+        <th width="10%" ><a  href='<?=encode_link($_SERVER["PHP_SELF"],array("sort"=>"1","up"=>$up))?>'><b>Id</b></a> </th>
+        <th width="10%" ><a  href='<?=encode_link($_SERVER["PHP_SELF"],array("sort"=>"2","up"=>$up))?>'><b>Fecha Evento</b></a></th>
+        <th width="35%" ><b>Detalle</b></a></th>
+        <th width="35%" ><b>Verificacion</b></a></th>
+        <th width="5%" ><b>Revisado</b></th>
+        <th width="5%" ><b>Aprobado</b></th>
+      </tr>
+    </thead>
     <?
   $i=1;
   while (!$resultado->EOF ) {
@@ -103,13 +95,14 @@ echo $html_header;
   $ref =encode_link("detalle_no_conformes.php", array("pagina"=>"listado","id" =>$resultado->fields["id_noconforme"]));
   $onclick_elegir="location.href='$ref'";?>
   
-    <tr  <?=atrib_tr()?>>
-      <td align="center"><input type="checkbox" name="borrar_<? echo $i; ?>" value="<? echo $resultado->fields['id_noconforme'].'_03';?>"></td>
-      <td align="center" onclick="<?=$onclick_elegir?>"><?='RG-SGC N TO'.$resultado->fields['id_noconforme'];?></font></td>
-      <td align="center" onclick="<?=$onclick_elegir?>"><? echo fecha($resultado->fields['fecha_evento']); ?></font></td>
-      <td align="center" onclick="<?=$onclick_elegir?>"><? echo $resultado->fields['descripcion_inconformidad']; ?></font></td>
-      <td align="center" onclick="<?=$onclick_elegir?>"><b><?=$rev_cartel?></b></td>
-      <td align="center" onclick="<?=$onclick_elegir?>"><b><?=$apro_cartel?></b></td>
+    <tr>
+      <td ><input type="checkbox" name="borrar_<? echo $i; ?>" value="<? echo $resultado->fields['id_noconforme'];?>"></td>
+      <td onclick="<?=$onclick_elegir?>"><?='RG-SGC N° TO 0'.$resultado->fields['id_noconforme'].'_03';?></td>
+      <td onclick="<?=$onclick_elegir?>"><? echo fecha($resultado->fields['fecha_evento']); ?></td>
+      <td onclick="<?=$onclick_elegir?>"><? echo $resultado->fields['deteccion']; ?></td>
+      <td onclick="<?=$onclick_elegir?>"><? echo $resultado->fields['con_cambio']; ?></td>
+      <td onclick="<?=$onclick_elegir?>"><b><?=$rev_cartel?></b></td>
+      <td onclick="<?=$onclick_elegir?>"><b><?=$apro_cartel?></b></td>
 
     </tr>
     <?
@@ -120,6 +113,5 @@ echo $html_header;
 
 </table>
 </form>
-</body>
-</html>
+</div>
 <?echo fin_pagina();// aca termino ?>

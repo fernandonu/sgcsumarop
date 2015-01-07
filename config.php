@@ -35,28 +35,17 @@ else
  ** Colores del sistema.
  *******************************************/
 
-$bgcolor_frames = "#B7CEEF";  //color de frames del sistema
-
-$bgcolor1 = "#5090C0";		// Primer color de fondo
+$bgcolor1 = "#BCD4E6";		// Primer color de fondo
 $bgcolor2 = "#D5D5D5";		// Segundo color de fondo
 $bgcolor3 = "#B7CEC4";		// Tercer color de fondo
-$bgcolor4 = "#FF0000";		// Color de fondo para tareas vencidas
-$bgcolor  = "#d1c294";
+$bgcolor  = "#BCD4E6";
 
 
 $bgcolor_out  = "#F2EFFB"; // Color de fondo (onmouseout)
 $bgcolor_over = "#E0E6F8"; // Color de fondo (onmouseover)
 $text_color_out  = "#000000";
-$text_color_over = "#000000";//"#006699";
-$fondo = "fondo_alter.gif"; //imagen de fondo
-$fondo = "fondo.gif"; //imagen de fondo
-$fondo1 = "fondo1.jpg"; //imagen de fondo del encabezado
+$text_color_over = "#000000";
 
-
-
-
-// atributo de los tr de los listados
-$atrib_tr="bgcolor=$bgcolor_out onmouseover=\"this.style.backgroundColor = '$bgcolor_over'; this.style.color = '$text_color_over'\" onmouseout=\"this.style.backgroundColor = '$bgcolor_out'; this.style.color = '$text_color_out'\"";
 
 /*******************************************
  ** Cantidad de items a mostrar por página.
@@ -107,11 +96,6 @@ $db_debug = FALSE;					// Debugger de las consultas.
  ** a la raíz de la página.
  ** (Ruta relativa al URL de la página)
  *******************************************/
-//if (ereg("(/modulos)|(/lib)|(/index.php)|(/menu.php)|(/menu_xml.php)|(/aviso.php)",$_SERVER["SCRIPT_NAME"],$tmp)) {
-//	$tmp=explode($tmp[1].$tmp[2].$tmp[3].$tmp[5].$tmp[6],$_SERVER["SCRIPT_NAME"]);
-//	$html_root = $tmp[0];
-//}
-//unset($tmp);
 
 if (ereg("(/modulos)|(/lib)|(/index.php)|(/menu_para_ayuda.php)|(/menu_xml.php)|(/aviso.php)",$_SERVER["SCRIPT_NAME"],$tmp)) {
 	$tmp=explode($tmp[1].$tmp[2].$tmp[3].$tmp[4].$tmp[5].$tmp[6],$_SERVER["SCRIPT_NAME"]);
@@ -155,10 +139,15 @@ $html_header = "
 	<link rel='icon' href='".((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME'])."$html_root/favicon.ico'>
 	<link REL='SHORTCUT ICON' HREF='".((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME'])."$html_root/favicon.ico'>
 	<link rel='stylesheet' type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/bootstrap.min.css'>
+	<link rel='stylesheet' type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/bootstrap-theme.min.css'>
 	<link rel='stylesheet' type='text/css' href='$html_root/lib/estilos.css'>
 	<link rel='stylesheet' type='text/css' href='$html_root/lib/estilos_bootstrap.css'>
+	<link rel='stylesheet' type='text/css' href='$html_root/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css'>
     <script type='text/javascript' src='$html_root/lib/jquery/jquery-1.11.1.min.js'></script>
     <script type='text/javascript' src='$html_root/lib/bootstrap-3.3.1/js/bootstrap.min.js'></script>
+    <script type='text/javascript' src='$html_root/lib/bootstrap-datetimepicker/moment.min.js'></script>
+    <script type='text/javascript' src='$html_root/lib/bootstrap-datetimepicker/moment.es.js'></script>
+    <script type='text/javascript' src='$html_root/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js'></script>
     <script type='text/javascript' src='$html_root/lib/funciones.js'></script>
     <script type='text/javascript'>
 		var winW=window.screen.Width;
@@ -193,7 +182,6 @@ $html_header = "
 		});
 	</script>
   </head>
- <body topmargin=0 background=$html_root/imagenes/$fondo bgcolor=\"$bgcolor3\" onresize='check_fix_size();'>";
+ <body onresize='check_fix_size();'>";
 
-$footer='';
 ?>

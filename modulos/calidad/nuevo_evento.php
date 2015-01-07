@@ -62,75 +62,53 @@ if ($parametros['id_evento'])
 ?>
 
 
-<?=$html_header?>
+<?php
+echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
+?>
 
-</head>
+
+<div  class="newstyle-full-container">
 
  <form name="nuevo_evento" method="POST" action="nuevo_evento.php">
- <br>
- <table align="center" width="100%">
-  <tr>
-   <td align="center">
-    <font size="3"><b><u>Eventos/Incidentes</u></b></font>
-   </td>
-  </tr>
- </table>
- <br>
- <? if ($parametros['id_evento']!=-1)
- {$sql = "select * from log_evento where id_evento=".$parametros['id_evento'];
-  $resul_log = sql($sql,"Error a traer los log"); 	
- ?>	
-  <table class="bordes" align="center" width="80%">
-   <tr id="mo">
-    <td align="center">
-     <b>Fecha</b>
-    </td>
-    <td align="center">
-     <b>Usuario</b>
-    </td>
-    <td align="center">
-     <b>Acción</b>
-    </td>
-   </tr>
-   <?
-    while (!$resul_log->EOF)
-    {
-   ?>
-    <tr id="ma">
-     <td align="center">
-      <?=fecha($resul_log->fields['fecha'])?>
-     </td>
-     <td align="center">
-      <?=$resul_log->fields['usuario']?>
-     </td>
-     <td align="center">
-      <?=$resul_log->fields['comentario']?>
-     </td>
-    </tr>
-   <?
-    $resul_log->MoveNext();
-    }
-    ?>
-  </table>
-  <?
-  }
-  ?>
+ 
+  <legend>Eventos - Incidentes</legend>          
+      
   <br>
-  <table align="center" width="60%" class="bordes" cellpadding="1">
-   <tr>
-    <td>
-     <b><font size="2">Area: </font></b>
-    </td>
-    <td>
-     <input <?if ($parametros['cmd']=="terminadas") echo "readonly"?>  name="area" type="text" size="25" value="<?=$area?>"> 
-    </td>    
-   </tr>
-   <tr>
-    <td>
-     <b><font size="2"> Tipo:</font></b>     
-    </td>
-    <td>
-     <select name="tipos" <?if ($parametros['cmd']=="terminadas") echo "disabled"?> >
+ <?if ($parametros['id_evento']!=-1){
+    $sql = "select * from log_evento where id_evento=".$parametros['id_evento'];
+    $resul_log = sql($sql,"Error a traer los log");?>	
+
+    <table class="table table-striped table-advance table-hover">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Usuario</th>
+          <th>Acción</th>      
+        </tr>
+      </thead>
+   <?while (!$resul_log->EOF){?>
+    <tr>
+     <td ><?=fecha($resul_log->fields['fecha'])?></td>
+     <td ><?=$resul_log->fields['usuario']?></td>
+     <td ><?=$resul_log->fields['comentario']?></td>
+    </tr>
+   <?$resul_log->MoveNext();
+    }?>
+  </table>
+  <?}?>
+
+  <br>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <label>Area:</label><input type="hidden" name="provinciacn" value="<?=$provinciacn?>" id="provinciacn">
+      <input <?if ($parametros['cmd']=="terminadas") echo "readonly"?>  name="area" type="text" size="25" value="<?=$area?>"> 
+    </div>    
+
+    <div class="span6">
+      <label>Tipo:</label><input type="hidden" name="tdrcn" value="<?=$tdrcn?>" id="tdrcn">
+      <select name="tipos" <?if ($parametros['cmd']=="terminadas") echo "disabled"?> >
       <?$sql = "select * from tipo_evento";
         $resul_eventos=sql($sql,"Error no se pudieron consultar los eventos ene l select de eventos");
         $selected="";
@@ -143,62 +121,40 @@ if ($parametros['id_evento'])
         $resul_eventos->MoveNext();
         }
       ?>
-     </select>     
-     </td>
-   </tr>
-   <tr>
-    <td colspan="2">
-     <b><font size="2"> Suceso:</font></b>
-    </td>
-   </tr>
-   <tr>
-    <td colspan="2">
-     <textarea <?if ($parametros['cmd']=="terminadas") echo "readonly"?> name="suseso" cols="100" rows="10"><?=$suseso?></textarea>
-    </td>
-   </tr> 
-   <tr>
-    <td colspan="2">
-     <b><font size="2"> Medida Tomada:</font></b>
-    </td>
-   </tr>
-   <tr>
-    <td colspan="2">
-     <textarea <?if ($parametros['cmd']=="terminadas") echo "readonly"?> name="medida" cols="100" rows="10"><?=$medida?></textarea>
-    </td>
-   </tr> 
-  </table>
-  <br>
-<? if ($parametros['cmd']=="pendientes") 
-{
-	?> 
-  <table align="center" width="50%" border="1">
-   <tr>
-    <? if ($parametros['id_evento']==-1) {
-    ?> 	
-    <td align="center">
-     <input type="submit" name="guardar" value="Guardar">
-    </td>
+     </select>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span6">
+      <label>Suceso:</label><input type="hidden" name="provinciacn" value="<?=$provinciacn?>" id="provinciacn">
+      <textarea <?if ($parametros['cmd']=="terminadas") echo "readonly"?> name="suseso" style="width: 571px;"><?=$suseso?></textarea>
+    </div>    
+
+    <div class="span6">
+      <label>Medida Tomada:</label><input type="hidden" name="tdrcn" value="<?=$tdrcn?>" id="tdrcn">
+      <textarea <?if ($parametros['cmd']=="terminadas") echo "readonly"?> name="medida" style="width: 571px;"><?=$medida?></textarea>
+    </div>
+  </div> 
+      
+     
+<?if ($parametros['cmd']=="pendientes"){?> 
+   <?if ($parametros['id_evento']==-1) {?> 
+      <div class="form-actions">
+        <input class="btn btn-primary" type="submit" name="guardar" value="Guardar">
+      </div>    
     <?}
-    else {
-    ?>
-    <td align="center">
-     <input type="submit" name="editar" value="Guardar">
-    </td>
-    <td align="center">
-     <input type="submit" name="terminar" value="Terminar">
-    </td>
-    <td align="center">
-     <input type="button" name="volver" value="Volver" onclick="document.location='eventos_incidentes.php'">
-    </td>
-    <?
-    }
-    ?>
-   </tr>
+    else {?>
+      <div class="form-actions">
+        <input class="btn btn-primary" type="submit" name="editar" value="Guardar">
+        <input class="btn btn-primary" type="submit" name="terminar" value="Terminar">
+        <input class="btn btn-info btn-large" type="button" name="volver" value="Volver" onclick="document.location='eventos_incidentes.php'">
+      </div>
+    <?}?>
    <input type="hidden" name="id_evento" value="<?=$parametros['id_evento']?>">
-  </table>
-  <?
-  }
- ?>
- </form>
- <?=fin_pagina();?>
+<?}?>
+
+</form>
+</div>
+<?=fin_pagina();?>
 

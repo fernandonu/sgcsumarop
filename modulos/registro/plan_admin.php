@@ -432,6 +432,7 @@ if ($id_registro){
 
 echo $html_header;
 cargar_calendario();
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 ?>
 <script>
 var img_ext='<?=$img_ext='../../imagenes/rigth2.gif' ?>';//imagen extendido
@@ -655,20 +656,10 @@ function clearfields(){
 <input type="hidden" value="<?=$id_dato_registro?>" name="id_dato_registro">
 
 <?php if ($accion){?>
-<table width='85%' border='1' align="center" class="table table-bordered"> 
-	<tr id="mo">
-  		<td id=mo colspan="2">
-  			<b>Mensajes de Registros</b>
-  		</td>
-  	</tr>  
-	<tr align="center"class="table table-bordered">			
-		   <td>
-			<b><font size="3" color="Red"><?=$accion?></font></b>
-		   </td>
-     </tr>           
-</table>
+<div class="alert alert-info" align="center">
+	<b>INFORMACION!</b> <?=$accion?>.
+</div>
 <?php }?>
-
 
 <?
 /*******Traemos y mostramos el Log **********/
@@ -687,7 +678,7 @@ $log=sql($q);
 																	  document.all.tabla_logs.style.display='block'
 																	  "> Mostrar Logs
 <!-- tabla de Log de la OC -->
-<div style="none:'block';width:98%;overflow:auto;<? if ($log->RowCount() > 3) echo 'height:60;' ?> " id="tabla_logs" >
+<div  style="display:none; width:98%; overflow:auto; <? if ($log->RowCount() > 2) echo 'height:60;' ?> " id="tabla_logs" >
 <table width='100%' border='1' align="center" class="table table-bordered"> 
 <?while (!$log->EOF){?>
 	<tr class="table table-bordered">
@@ -808,12 +799,12 @@ $log=sql($q);
 	 	if($estado_capitas=="0") $desabilita_editar_1=""; else $desabilita_editar_1="disabled";
 	 	
 	 	if (!$id_registro){?>
-			<input type="submit" name="guardar_1" value="Guardar" title="Guardar" style="width:150px;height:50px" onclick="return control_nuevos_1()" >&nbsp;&nbsp;
+			<input class="btn btn-primary" type="submit" name="guardar_1" value="Guardar" title="Guardar" onclick="return control_nuevos_1()" >&nbsp;&nbsp;
 		<?}
 		else{?>
-			<input type=button name="editar" value="Editar" onclick="editar_campos_1()" title="Edita Campos" style="width:130px" <?=$desabilita_editar_1?>> &nbsp;&nbsp;
-		    <input type="submit" name="guardar_editar_1" value="Guardar" title="Guardar" style="width:130px" onclick="return control_nuevos_1()" disabled>&nbsp;&nbsp;
-		    <input type="button" name="cancelar_editar_1" value="Cancelar" title="Cancela Edicion" disabled style="width:130px" onclick="document.location.reload()">
+			<input class="btn btn-primary" type=button name="editar" value="Editar" onclick="editar_campos_1()" title="Edita Campos" <?=$desabilita_editar_1?>> &nbsp;&nbsp;
+		    <input class="btn btn-primary" type="submit" name="guardar_editar_1" value="Guardar" title="Guardar" onclick="return control_nuevos_1()" disabled>&nbsp;&nbsp;
+		    <input class="btn btn-primary" type="button" name="cancelar_editar_1" value="Cancelar" title="Cancela Edicion" disabled onclick="document.location.reload()">
 	 	<?}?> 
 	 </td>
 	</tr>
@@ -871,8 +862,7 @@ $log=sql($q);
 		    </td>					    		    
 		</tr>
 
-		
-		<tr><td colspan="4"><table id='revalid1' style='display: none;'><tr>	
+		<tr><td colspan="4"><table id='revalid1' style='display: <?=($validacion=='N')?'inline':'none';?>;'><tr>	
 			<td align="right">
 				<b>Revalidacion:</b>
 			</td>
@@ -987,13 +977,13 @@ $log=sql($q);
 		    </td>					    		    
 		</tr> 
 
-		 <tr><td colspan="4"><table id='revalid2' style='display: none;'><tr>
+		 <tr><td colspan="4"><table id='revalid2' style='display: <?=($valida=='N')?'inline':'none';?>;'><tr>
 			<td align="right">
 				<b>Revalidacion:</b>
 			</td>	
 			<td align="left">	
-		    	<input type="radio" name="revalid" value="S" <?=($revalid=='S')?'checked':'';?> onclick="document.form1.fecha_reval1.focus()" >Si
-				<input type="radio" name="revalid" value="N" <?=($revalid=='N')?'checked':'';?> onclick="alert('Debe Generar Producto NO Conforme')">No
+		    	<input type="radio" name="revalid" value="S" <?=($valida=='S')?'checked':'';?> onclick="document.form1.fecha_reval1.focus()" >Si
+				<input type="radio" name="revalid" value="N" <?=($valida=='N')?'checked':'';?> onclick="alert('Debe Generar Producto NO Conforme')">No
 		    </td>	
 		    <td align="right">
 				<b>Fecha Revalidacion:</b>
@@ -1055,17 +1045,19 @@ $log=sql($q);
   	<tr class="table table-bordered">
 	 <td align="center" colspan="8" class="bordes">
 	 	<?if ($estado_capitas==0){?>
-		    <input type="submit" name="guardar_editar_2" value="Guardar" title="Guardar Registro Capitas" style="width:150px;height:40px" onclick="return control_nuevos_2()" >&nbsp;&nbsp;
+		    <input class="btn btn-primary" type="submit" name="guardar_editar_2" value="Guardar" title="Guardar Registro Capitas"  onclick="return control_nuevos_2()" >&nbsp;&nbsp;
 		 <?}?>
 		 <?if ($estado_capitas==0){?>
-		    <input type="submit" name="guardar_revisado_2" value="Revisado" title="Marca Registro Capitas Revisado" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro como Revisado?'))return true;else return false;">&nbsp;&nbsp;
+		    <input class="btn btn-primary" type="submit" name="guardar_revisado_2" value="Revisado" title="Marca Registro Capitas Revisado" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro como Revisado?'))return true;else return false;">&nbsp;&nbsp;
 		 <?}?>
 		 <?if ($estado_capitas==1){?>
-		    <input type="submit" name="guardar_crevision_2" value="Corregir Revisado" title="Abre Registro Capitas Para Corregir" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Abrir el Registro para Revision?'))return true;else return false;">&nbsp;&nbsp;
-		    <input type="submit" name="guardar_aprobado_2" value="Aprobado" title="Marca Registro Capitas APROBADO" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro como Aprobado? EL REGISTRO QUEDARA CERRADO PARA MODIFICACIONES'))return true;else return false;">&nbsp;&nbsp;
+		    <input class="btn btn-primary" type="submit" name="guardar_crevision_2" value="Corregir Revisado" title="Abre Registro Capitas Para Corregir" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Abrir el Registro para Revision?'))return true;else return false;">&nbsp;&nbsp;
+		    <input class="btn btn-primary" type="submit" name="guardar_aprobado_2" value="Aprobado" title="Marca Registro Capitas APROBADO" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro como Aprobado? EL REGISTRO QUEDARA CERRADO PARA MODIFICACIONES'))return true;else return false;">&nbsp;&nbsp;
 	 	 <?}?>
 	 	 <?if ($estado_capitas==2){?>
-	 	 	<font color="red" size="+1"><b>Registro de Capitas Revisado Y Aprobado</b></font>
+	 	 	<div class="alert alert-danger" align="center">
+	 	 		<b>Registro de Capitas Revisado Y Aprobado</b>
+	 	 	</div>
 	 	 <?}?>
 
 	 </td>
@@ -1128,7 +1120,7 @@ $log=sql($q);
 		    </td>   		    
 		</tr> 
 
-		<tr><td colspan="4"><table id='revalid3' style='display: none;'><tr>				
+		<tr><td colspan="4"><table id='revalid3' style='display: <?=($valid_adm=='N')?'inline':'none';?>;'><tr>				
 		    <td align="right">
          	  <b>Revalidacion:</b>
          	</td>         	
@@ -1231,17 +1223,19 @@ $log=sql($q);
   	<tr>
 	 <td align="center" colspan="8" class="bordes">
 	 		<?if ($estado_adm==0){?>
-		    	<input type="submit" name="guardar_editar_3" value="Guardar" title="Guardar Datos Administracion" style="width:150px;height:40px" onclick="return control_nuevos_3()">&nbsp;&nbsp;
+		    	<input class="btn btn-primary" type="submit" name="guardar_editar_3" value="Guardar" title="Guardar Datos Administracion" onclick="return control_nuevos_3()">&nbsp;&nbsp;
 			<?}?>
 			<?if ($estado_adm==0){?>
-			    <input type="submit" name="guardar_revisado_3" value="Revisado" title="Marca Registro Administracion Revisado" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro de Administracion como Revisado?'))return true;else return false;">&nbsp;&nbsp;
+			    <input class="btn btn-primary" type="submit" name="guardar_revisado_3" value="Revisado" title="Marca Registro Administracion Revisado" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro de Administracion como Revisado?'))return true;else return false;">&nbsp;&nbsp;
 			 <?}?>
 			 <?if ($estado_adm==1){?>
-			    <input type="submit" name="guardar_crevision_3" value="Corregir Revisado" title="Abre Registro Administracion Para Corregir" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Abrir el Registro de Administracion para Revision?'))return true;else return false;">&nbsp;&nbsp;
-			    <input type="submit" name="guardar_aprobado_3" value="Aprobado" title="Marca Registro Administracion APROBADO" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro de Administracion como Aprobado? EL REGISTRO QUEDARA CERRADO PARA MODIFICACIONES'))return true;else return false;">&nbsp;&nbsp;
+			    <input class="btn btn-primary" type="submit" name="guardar_crevision_3" value="Corregir Revisado" title="Abre Registro Administracion Para Corregir" style="width:150px;height:40px" onclick="if (confirm('Esta Seguro que Desea Abrir el Registro de Administracion para Revision?'))return true;else return false;">&nbsp;&nbsp;
+			    <input class="btn btn-primary" type="submit" name="guardar_aprobado_3" value="Aprobado" title="Marca Registro Administracion APROBADO" onclick="if (confirm('Esta Seguro que Desea Marcar el Registro de Administracion como Aprobado? EL REGISTRO QUEDARA CERRADO PARA MODIFICACIONES'))return true;else return false;">&nbsp;&nbsp;
 		 	 <?}?>
 		 	 <?if ($estado_adm==2){?>
-		 	 	<font color="red" size="+1"><b>Registro Administracion Revisado Y Aprobado</b></font>
+		 	 	<div class="alert alert-danger" align="center">
+		 	 		<b>Registro Administracion Revisado Y Aprobado</b>
+		 	 	</div>
 		 	 <?}?>
 	 </td>
 	</tr>
@@ -1255,14 +1249,10 @@ $log=sql($q);
   
   
 <table width=100% align="center" class="table table-bordered">
-	<tr>
-  		<td id=mo colspan="2">
-  			<b>Acciones</b>
-  		</td>
-  	</tr>  
+	
 	<tr align="center">			
 		   <td>
-			<input type=button name="volver" value="Volver" onclick="document.location='./plan_listado.php'"title="Volver al Listado" style="width:150px;height:40px">
+			<input class="btn btn-info btn-large" type=button name="volver" value="Volver" onclick="document.location='./plan_listado.php'"title="Volver al Listado" >
 		   </td>
      </tr>           
 </table>
@@ -1291,18 +1281,9 @@ function realizaProceso(id1, id2, id3, ac1, ac2){
 }
 </script>
 
-<table width=100% align="center" class="table table-bordered">
-	<tr id="mo">
-  		<td id=mo colspan="2">
-  			<b>Mensajes de Registros Soporte</b>
-  		</td>
-  	</tr>  
-	<tr align="center">			
-		   <td>
-			<b><font size="3" color="Red"><span id="resultado"></span></font></b>
-		   </td>
-     </tr>           
-</table>
+<div class="alert alert-danger" align="center">		
+	<b><span id="resultado"></span></b>
+</div>
 
   </table></td></tr>
   </table>
@@ -1321,7 +1302,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <img id="imagen_2" src="<?=$img_ext?>" border=0 title="Mostrar" align="left" style="cursor:pointer;" onclick="muestra_tabla(document.all.prueba_vida,2);" >
 	  </td>
 	  <td align="center">
-	   <b>No Conformidades</b> &nbsp&nbsp
+	   <b>Tratamiento de Ocurrencias</b> &nbsp&nbsp
 	   <?$ref =encode_link("../calidad/detalle_no_conformes.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
 	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
@@ -1332,7 +1313,9 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
-	   <font size="3" color="Red"><b>No existen: No Conformidades</b></font>
+	  	<div class="alert alert-info" align="center">
+			<b>INFORMACION!</b> No existen: Ocurrencias.
+		</div>	   
 	  </td>
 	 </tr>
 	 <?}
@@ -1367,20 +1350,20 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
             }
             ?>
 	 		<tr <?=atrib_tr()?>>
-		 		<td align="center" onclick="<?=$onclick_elegir?>"><?='RG-SGC N TO'.$res_comprobante->fields['id_noconforme'].'_03'?></td>
+		 		<td align="center" onclick="<?=$onclick_elegir?>"><?='RG-SGC N TO 0'.$res_comprobante->fields['id_noconforme'].'_03'?></td>
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=$res_comprobante->fields['area']?></td>
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=fecha($res_comprobante->fields['fecha_emision'])?></td>		 		
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=fecha($res_comprobante->fields['fecha_evento'])?></td>	
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=$res_comprobante->fields['usuario']?></td>				
 		 		<td align="center">
 		 			<?if ($apro_cartel=='NO'){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_noconforme']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','nc');}" value="Revisar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_noconforme']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','nc');}" value="Revisar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Revisado: <?=$rev_cartel?></b>
 		 		</td>				
 		 		<td align="center">
 		 			<?if (($rev_cartel=='SI')&&($apro_cartel=='NO')){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_noconforme']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','nc');}" value="Aprobar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_noconforme']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','nc');}" value="Aprobar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Aprobado: <?=$apro_cartel?></b>
 		 		</td>				
@@ -1408,17 +1391,19 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Planes de Accion</b> &nbsp&nbsp
 	   <?$ref =encode_link("../calidad/pac_pap.php", array("id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
+	   &nbsp;&nbsp;<input type="button" name="boton1" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
 </table>
 <table class="table table-bordered" id="prueba_vida2" border="1" width="100%" style="display:none;border:thin groove"align="center">
 	<?if ($res_comprobante->RecordCount()==0){?>
-	 <tr>
+	<tr>
 	  <td align="center">
-	   <font size="3" color="Red"><b>No existen: Planes de Accion</b></font>
+	  	<div class="alert alert-info" align="center">
+			<b>INFORMACION!</b> No existen: Planes de Accion.
+		</div>	   
 	  </td>
-	 </tr>
+	 </tr>	 
 	 <?}
 	 else{	 	
 	 	?>
@@ -1456,13 +1441,13 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?if($res_comprobante->fields['tipo']==0) echo "P.A.C."; else echo "P.A.P.";?></td>
 		 		<td align="center">
 		 			<?if ($apro_cartel=='NO'){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_pac_pap']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','pa');}" value="Revisar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_pac_pap']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','pa');}" value="Revisar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Revisado: <?=$rev_cartel?></b>
 		 		</td>				
 		 		<td align="center">
 		 			<?if (($rev_cartel=='SI')&&($apro_cartel=='NO')){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_pac_pap']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','pa');}" value="Aprobar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_pac_pap']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','pa');}" value="Aprobar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Aprobado: <?=$apro_cartel?></b>
 		 		</td>				
@@ -1489,7 +1474,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Memo</b> &nbsp&nbsp
 	   <?$ref =encode_link("./memo.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
+	   &nbsp;&nbsp;<input type="button" name="boton2" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
 </table>
@@ -1497,9 +1482,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
-	   <font size="3" color="Red"><b>No existen: Memo</b></font>
+	  	<div class="alert alert-info" align="center">
+			<b>INFORMACION!</b> No existen: MEMO.
+		</div>	   
 	  </td>
-	 </tr>
+	 </tr>	
 	 <?}
 	 else{	 	
 	 	?>
@@ -1539,13 +1526,13 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=number_format($res_comprobante->fields['monto'],2,',','.')?></td>	
 		 		<td align="center">
 		 			<?if ($apro_cartel=='NO'){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_memo']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','me');}" value="Revisar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_memo']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','me');}" value="Revisar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Revisado: <?=$rev_cartel?></b>
 		 		</td>				
 		 		<td align="center">
 		 			<?if (($rev_cartel=='SI')&&($apro_cartel=='NO')){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_memo']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','me');}" value="Aprobar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_memo']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','me');}" value="Aprobar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Aprobado: <?=$apro_cartel?></b>
 		 		</td>		 		
@@ -1573,7 +1560,7 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	   <b>Informes ACE</b> &nbsp&nbsp
 	   <?$ref =encode_link("./inf.php", array("pagina_viene"=>"plan_admin","id_registro" =>$id_registro));
 	   $onclick="location.href='$ref'";?>
-	   &nbsp;&nbsp;<input type="button" name="boton" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
+	   &nbsp;&nbsp;<input type="button" name="boton3" value='Agregar Nuevo' onclick="<?=$onclick?>" class="btn btn-primary">
 	  </td>
 	</tr>
 </table>
@@ -1581,9 +1568,11 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 	<?if ($res_comprobante->RecordCount()==0){?>
 	 <tr>
 	  <td align="center">
-	   <font size="3" color="Red"><b>No existen: Informes</b></font>
+	  	<div class="alert alert-info" align="center">
+			<b>INFORMACION!</b> No existen: Informes ACE.
+		</div>	   
 	  </td>
-	 </tr>
+	 </tr>	
 	 <?}
 	 else{	 	
 	 	?>
@@ -1617,20 +1606,20 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
             }?>
 
 	 		<tr <?=atrib_tr()?>>
-		 		<td align="center" onclick="<?=$onclick_elegir?>"><?='RG-SGC N InfACE'.$res_comprobante->fields['id_informe_ace'].'_02'?></td>
+		 		<td align="center" onclick="<?=$onclick_elegir?>"><?='RG-SGC N InfACE 0'.$res_comprobante->fields['id_informe_ace'].'_02'?></td>
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=$res_comprobante->fields['audit']?></td>
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=$res_comprobante->fields['documento']?></td>		 		
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=$res_comprobante->fields['num_leg']?></td>		 		
 		 		<td align="center" onclick="<?=$onclick_elegir?>"><?=fecha($res_comprobante->fields['fecha'])?></td>
 		 		<td align="center">
 		 			<?if ($apro_cartel=='NO'){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_informe_ace']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','ac');}" value="Revisar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como REVISADO')){realizaProceso(<?=$res_comprobante->fields['id_informe_ace']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Revisar','ac');}" value="Revisar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Revisado: <?=$rev_cartel?></b>
 		 		</td>				
 		 		<td align="center">
 		 			<?if (($rev_cartel=='SI')&&($apro_cartel=='NO')){?>
-		 				<input type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_informe_ace']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','ac');}" value="Aprobar"/>
+		 				<input class="btn btn-primary" type="button" href="javascript:;" onclick="if (confirm('Esta Seguro que desea Marcar como APROBADO')){realizaProceso(<?=$res_comprobante->fields['id_informe_ace']?>, <?=$id_registro?>,<?=$id_dato_registro?>,'Aprobar','ac');}" value="Aprobar"/>
 		 			<?}?>
 		 			&nbsp&nbsp <b>Aprobado: <?=$apro_cartel?></b>
 		 		</td>			 		
@@ -1661,9 +1650,9 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
 ?>
 			<tr>
 				<td align=right id=mo>Archivo</td>
-				<!--<td align=right id=mo>Fecha</td>-->
+				<td align=right id=mo>Fecha</td>
 				<td align=right id=mo>Subido por</td>
-				<td align=right id=mo>Tamaño</td>
+				<td align=right id=mo>Tamano</td>
 				<td align=center id=mo>&nbsp;</td>
 			</tr>
 <?
@@ -1672,17 +1661,15 @@ $res_comprobante=sql($query,"<br>Error al traer los comprobantes<br>") or fin_pa
  					if (is_file("../../uploads/archivoscalidad/".$rta_archivos->fields["nombre"])) echo "<a target=_blank href='".encode_link("../archivos/archivos_lista.php", array ("file" =>$rta_archivos->fields["nombre"],"size" => $rta_archivos->fields["size"],"cmd" => "download_plan"))."'>";
 				  echo $rta_archivos->fields["nombre"]."</a></td>";
 		?>    
-  	  			<!--<td align=center>&nbsp;<?//=Fecha($rta_archivos->fields["fecha"])?></td>-->
+  	  				<td align=center>&nbsp;<?=Fecha($rta_archivos->fields["fecha"])?></td>
 				    <td align=center>&nbsp;<?= $rta_archivos->fields["creadopor"] ?></td>
 				    <td align=center>&nbsp;<?= $size=number_format($rta_archivos->fields["size"] / 1024); ?> Kb</td>
-	    			<td align=center>
-		<?    
-					$lnk=encode_link("$_SERVER[PHP_SELF]",Array("id_registro"=>$id_registro,"id_archivo"=>$rta_archivos->fields["id"],"filename"=>$rta_archivos->fields["nombre"],"modo"=>"borrar_archivo"));
-		      
-		      	echo "<a href='$lnk'><img src='../../imagenes/close1.gif' border=0 alt='Eliminar el archivo: \"". $rta_archivos->fields["nombre"] ."\"'></a>";
-		      
-	  	    echo "</td></tr>";
-					$rta_archivos->movenext();
+	    			<?$lnk=encode_link("$_SERVER[PHP_SELF]",Array("id_registro"=>$id_registro,"id_archivo"=>$rta_archivos->fields["id"],"filename"=>$rta_archivos->fields["nombre"],"modo"=>"borrar_archivo"));
+		      		$onclick_eliminar="if (confirm('Esta Seguro que Desea Eliminar el Archivo ".$rta_archivos->fields["nombre"]."?')) location.href='$lnk'
+	            						else return false;	";?>
+		      		<td onclick="<?=$onclick_eliminar?>"><i class='glyphicon glyphicon-remove-circle'></i> Eliminar</td>
+	  	   			</tr>
+					<? $rta_archivos->movenext();
 				}
 			}
 ?>		

@@ -23,6 +23,11 @@ else
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Programa Sumar</title>
+<link rel='stylesheet' type='text/css' href='lib/bootstrap-3.3.1/css/custom-bootstrap.css'>
+<link rel='stylesheet' type='text/css' href='lib/bootstrap-3.3.1/css/main.css'>
+<link rel="icon" href="<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico">
+<link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico'>
+
 <style type="text/css">
 <!--
 body {
@@ -127,15 +132,16 @@ a:active {
 .Estilo1 {font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 16px; color: #009ADF; font-weight: bold; }
 -->
 </style>
-<head>
-<link rel="icon" href="<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico">
-<link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico'>
-
-<link type='text/css' href='<? echo $html_root; ?>/lib/estilos.css' REL='stylesheet'>
 </head>
 
 
 <body style="overflow:hidden;" onLoad="javascript: document.frm.username.focus();" topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0">
+
+<?if (!BROWSER_OK){?>
+<script type="text/javascript">window.open ("https://www.google.com/chrome/browser/desktop/index.html","_blank")</script>
+<div class="alert alert-danger" align="center">NAVEGADOR NO COMPATIBLE. <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank"> Recomendamos Instalar Google Chrome. </a></div>
+<?}?>
+
 <form action='index.php' method='post' name='frm'>
 <input type="hidden" name="resolucion_ancho" value="">
 <input type="hidden" name="resolucion_largo" value="">
@@ -143,7 +149,8 @@ a:active {
 
 <table width="100" border="0" align="center" cellpadding="0" cellspacing="2">
   <tr>
-    <td height="528" align="center"><table width="1000" height="528" border="0" cellpadding="0" cellspacing="0">
+    <td height="528" align="center">
+    <table width="1000" height="528" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td width="8">&nbsp;</td>
         <td width="800" valign="bottom"><img src="imagenes/somb.png" width="100%" height="11" /></td>
@@ -171,52 +178,55 @@ a:active {
         </tr>
       
 	  <tr>
-        <td valign="top" bgcolor="#FFFFFF"><table width="983" border="0" cellspacing="0" cellpadding="0">
-		<form method="POST" action="--WEBBOT-SELF--">
-          <tr>
-            <td width="462" valign="top"><img src="http://programasumar.com.ar/banner/bannergc.jpg" width="460" height="342" /></td>
-            <td width="521" align="center"><table width="0" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
-              </tr>
-              <tr>
-                <td nowrap="nowrap"><div align="center" class="Estilo1">
-                  <div align="left">Ingrese su usuario y contraseña <font color=red> </font></div>
-                </div></td>
-              </tr>
-              <tr>
-                <td nowrap="nowrap" class="Estilo1">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
-              </tr>
-              <tr>
-                <td nowrap="nowrap" class="Estilo1">&nbsp;</td>
-              </tr>
-            </table>
-              <table border="0" align="center" cellpadding="0" cellspacing="15">
-              <tr>
-                <td class="Texto"><img src="imagenes/usr.png" alt="Usuario:" width="32" height="32" /></td>
-                <td align="left" valign="middle" class="Titulo"><input name="username" type="text" class="Texto" size="10" /></td>
-              </tr>
-              <tr>
-                <td class="Texto"><img src="imagenes/contrasena.png" alt="Contraseña:" width="32" height="32" /></td>
-                <td align="left" valign="middle" class="Titulo"><input name="password" type="password" class="Texto" size="10" /></td>
-              </tr>
-              <tr>
-                <td colspan="2" align="center" class="Titulo"><div align="center">
-                    <input type="submit" name="loginform" class="Grande2" value="Ingresar" />
-                </div></td>
-              </tr>
-			</form>
-            </table></td>
-          </tr>
-        </table></td>
-        </tr>
-		
-    </table>
-    </td>
+        <td valign="top" bgcolor="#FFFFFF">
+          <table width="983" border="0" cellspacing="0" cellpadding="0">
+      		    <form method="POST">
+                <tr>
+                  <td width="462" valign="top"><img src="http://programasumar.com.ar/banner/bannergc.jpg" width="460" height="342" /></td>
+                  <td width="521" align="center">
+                  <table width="0" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td align="center" valign="middle" nowrap="nowrap">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap"><div align="center" class="Estilo1">
+                        <div align="left">Ingrese su usuario y contraseña <font color=red> </font></div>
+                      </div></td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap" class="Estilo1">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap" class="Estilo1">&nbsp;</td>
+                    </tr>
+                  </table>
+                    <table border="0" align="center" cellpadding="0" cellspacing="15">
+                    <tr>
+                      <td class="Texto"><img src="imagenes/usr.png" alt="Usuario:" width="32" height="32" /></td>
+                      <td align="left" valign="middle" class="Titulo"><input name="username" type="text" class="Texto" size="10" /></td>
+                    </tr>
+                    <tr>
+                      <td class="Texto"><img src="imagenes/contrasena.png" alt="Contraseña:" width="32" height="32" /></td>
+                      <td align="left" valign="middle" class="Titulo"><input name="password" type="password" class="Texto" size="10" /></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="center" class="Titulo"><div align="center">
+                          <input class="btn btn-primary" type="submit" name="loginform" value="Iniciar Sesi&oacute;n" />
+                      </div></td>
+                    </tr>
+                  </table>
+                  </td>
+                </tr>
+      			</form>
+        </table>
+      </td>
+   </tr>
+
+
+  </table>
+  </td>
   </tr>
 </table>
-
-
 <script>
 //guardamos la resolucion de la pantalla del usuario en los hiddens para despues recuperarlas
 //y guardarlas en las variable de sesion $_ses_user
@@ -224,6 +234,6 @@ document.all.resolucion_ancho.value=screen.width;
 document.all.resolucion_largo.value=screen.height;
 
 </script>
-</body>
 </form>
+</body>
 </html>

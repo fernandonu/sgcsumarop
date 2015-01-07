@@ -76,6 +76,8 @@ if($_POST["guardar_editar"]=="Guardar"){
 
 echo $html_header;
 cargar_calendario();
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
+
 if ($id_informe_ace){
 	$query="select *
 			from registro.informe_ace
@@ -146,7 +148,7 @@ function mostrar_1(){
 <input type="hidden" name="id_registro" value="<?=$id_registro?>">
 <input type="hidden" name="id_informe_ace" value="<?=$id_informe_ace?>">
 
-<table cellspacing='2' cellpadding='2' width='60%' align='center' border='1' bgcolor='<?=$bgcolor_out?>'>
+<table cellspacing='2' cellpadding='2' width='60%' align='center' border='1' class="table table-bordered">
 <br>
     <tr id="mo">
     	<td align="center" colspan="2">
@@ -271,24 +273,22 @@ function mostrar_1(){
 	 </tr>
 
     <tr>
-    	<td align="center" colspan="2"  id="mo">
+    	<td align="center" colspan="2">
     		<?if ($id_informe_ace){?>
-				<input type="submit" name="guardar_editar" value="Guardar" onclick="return control_nuevos()">
+				<input class="btn btn-primary" type="submit" name="guardar_editar" value="Guardar" onclick="return control_nuevos()">
 			<?}else{?>
-				<input type="submit" name="guardar" value="Guardar" onclick="return control_nuevos()">
+				<input class="btn btn-primary" type="submit" name="guardar" value="Guardar" onclick="return control_nuevos()">
 			<?}?>
     		&nbsp;&nbsp;&nbsp;
     		<?if ($pagina_viene=='listado_ace.php'){?>
-    			<input type="button" name="cerrar" value="Volver" onclick="document.location='listado_ace.php'" >
+    			<input class="btn btn-info btn-large" type="button" name="cerrar" value="Volver" onclick="document.location='listado_ace.php'" >
     		<?}
     		else{?>
-    			<input type="button" name="cerrar" value="Volver" onclick="document.location='plan_listado.php'" >
+    			<input class="btn btn-info btn-large" type="button" name="cerrar" value="Volver" onclick="document.location='plan_listado.php'" >
     		<?}?>
     	</td>    	
     </tr>    
 </table>
-<br>
-<br>
 </form>
 </body>
 </html>

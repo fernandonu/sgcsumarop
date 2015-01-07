@@ -3,6 +3,7 @@
 require_once("../../config.php");
 
 echo $html_header;
+echo "<link rel=stylesheet type='text/css' href='$html_root/lib/bootstrap-3.3.1/css/custom-bootstrap.css'>";
 
 ?>
 
@@ -23,20 +24,17 @@ function bajo(src,color_default) {
 }
 
 </script>
-
+<div class="newstyle-full-container">
 <form action="listar_quejas.php" method="post" name="form_listar_queja">
 
 
 
 <?php 
 
-echo "<table align=center cellpadding=5 cellspacing=0 >";
-
 echo "<input type=hidden name=sort value='$sort'>\n";
 
 echo "<input type=hidden name=up value='$up'>\n";
 
-echo "<tr><td>\n";
 
 // Formulario de busqueda
 
@@ -94,66 +92,44 @@ $contar="select count(*) from quejas";
 
 if($_POST['keyword'] || $keyword)// en la variable de sesion para keyword hay datos)
 
-     $contar="buscar";
-
-list($sql,$total,$link_pagina,$up2) = form_busqueda($sql_temp,$orden,$filtro,$link_tmp,$where_tmp,$contar);
-
-echo "&nbsp;&nbsp;&nbsp;<input type=submit name='form_busqueda' value='   Buscar   '>";
-
-echo "</td></tr>\n";
-
-echo "</table>\n";
-
-$res_query = sql($sql) or die();
+     $contar="buscar";?>
 
 
 
-?>
+<div class="row-fluid" align="center">
+        <div class="span12" >
+          <?list($sql,$total,$link_pagina,$up2) = form_busqueda($sql_temp,$orden,$filtro,$link_tmp,$where_tmp,$contar);?>
+           <input class="btn" type=submit name="buscar" value='Buscar' >
+           <input class="btn" name="nueva_queja" type="button" value="Nueva Queja" Onclick="location.href='calidad_quejas.php';">
+        </div>
+</div>
+
+<? $res_query = sql($sql) or die();?>
 
 <br>
 
 
+<hr>
+  <div class="pull-right paginador">
+      <?=$total ?> Quejas.
+      <?=$link_pagina?>
+  </div>
+  
+  <table class="table table-striped table-advance table-hover">
+    <thead>
+      <tr>
 
+		<td ><a href='<? echo encode_link("listar_quejas.php",Array('sort'=>1,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>Numero</b></a></td>
+		<td ><a href='<? echo encode_link("listar_quejas.php",Array('sort'=>1,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>Nombre_cliente</b></a></td>
 
+		<td ><a href='<? echo encode_link("listar_quejas.php",Array('sort'=>5,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>E-mail</b></a></td>
 
-<table border=0 width=100% cellspacing=2 cellpadding=3>
+		<td ><a href='<? echo encode_link("listar_quejas.php",Array('sort'=>2,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><strong>Fecha</strong></a></td>
 
-<tr>
+		<td ><a href='<? echo encode_link("listar_quejas.php",Array('sort'=>3,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><strong>Tipo</strong></a></td>
 
-<td colspan=5 align=left id=ma> <? echo "\n";?>
-
-	<table width=100%>
-
-	 <tr id=ma><? echo "\n";?>
-
-	  <td width=30% align=left><b><? echo "Total:</b> $total Quejas.</td>\n";?>
-
-      <td width=70% align=right><? echo $link_pagina ?></td> <? echo"\n";?>
-
-	 </tr>
-
-	</table> <? echo "\n";?>
-
-  </td>
-
-</tr>
-
-<tr>
-
-<!--<td width="10%" align="center" id=mo><a id=mo href='<?// echo encode_link("listar_quejas.php",Array('sort'=>1,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>ID Queja</b></a></td>-->
-
-<td width="10%" align="center" id=mo><a id=mo href='<? echo encode_link("listar_quejas.php",Array('sort'=>1,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>Numero</b></a></td>
-<td width="10%" align="center" id=mo><a id=mo href='<? echo encode_link("listar_quejas.php",Array('sort'=>1,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>Nombre_cliente</b></a></td>
-
-<td width="10%" align="center" id=mo><a id=mo href='<? echo encode_link("listar_quejas.php",Array('sort'=>5,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><b>E-mail</b></a></td>
-
-<td width="10%" align="center" id=mo><a id=mo href='<? echo encode_link("listar_quejas.php",Array('sort'=>2,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><strong>Fecha</strong></td>
-
-<td width="10%" align="center" id=mo><a id=mo href='<? echo encode_link("listar_quejas.php",Array('sort'=>3,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><strong>Tipo</strong></td>
-
-<!--<td width="10%" align="center" id=mo><a id=mo href='<? //echo encode_link("listar_quejas.php",Array('sort'=>4,'up'=>$up2,'page'=>$page,'keyword'=>$keyword,'filter'=>$filter))?>'><strong>Usuario</strong></td>-->
-
-</tr>
+	  </tr>
+	  </thead>
 
 
 
@@ -247,7 +223,7 @@ $res_query = sql($sql) or die();
 
 <?$ref = encode_link("calidad_quejas.php", array("id_queja" =>$res_query->fields["id_queja"]));
     $onclick_elegir="location.href='$ref'";?>
-<tr <?=atrib_tr()?>>
+<tr >
    <td align="center" onclick="<?=$onclick_elegir?>"><? echo $res_query->fields["id_queja"] ?></td>
    <td align="center" onclick="<?=$onclick_elegir?>"><? echo $res_query->fields['nbre_cl'] ?></td>
    <td align="center" onclick="<?=$onclick_elegir?>"><? echo $res_query->fields['mail'] ?></td>
@@ -267,12 +243,6 @@ $res_query = sql($sql) or die();
 
 </table>
 
-<br>
-
-<div align="center">
-
-<input name="nueva_queja" type="button" value="Nueva Queja" Onclick="location.href='calidad_quejas.php';">
+</form>
 
 </div>
-
-</form>

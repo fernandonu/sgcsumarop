@@ -3,12 +3,26 @@ function drawView(){
 	global $mock;
 	global $result;
 	?>
-	<table border=0 width=50% cellspacing=2 cellpadding=2 bgcolor='<?=$bgcolor3?>' align=center>
+	<table cellspacing=2 cellpadding=2 border=0 width=100% align=center >
+		<tr >
+			<td align=center class="table table-hover">
+				<?//list($sql,$total_muletos,$link_pagina,$up) = form_busqueda($sql_tmp,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
+				&nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'style="width:120px;height:30px">
+				&nbsp;&nbsp;<input type='button' name="nueva_exd" value='Nuevo Efector' onclick="document.location='formulario_efector.php'" style="width:120px;height:30px">
+				&nbsp;&nbsp;<? $link=encode_link("plan_listado_excel.php",array("cmd"=>$cmd));?>
+				<b>Listado Completo: </b><img src="../../imagenes/excel.gif" style='cursor:hand;' title="Listado Completo" onclick="window.open('<?=$link?>')">
+				&nbsp;&nbsp;<? $link=encode_link("plan_listado_excel1.php",array("cmd"=>$cmd));?>
+				<b>Listado Simple: </b><img src="../../imagenes/excel.gif" style='cursor:hand;' title="Listado Simple" onclick="window.open('<?=$link?>')">
+			</td>
+		</tr>
+	</table>
+	
+	<table class="table table-hover">
 	  <tr>
 	  	<td colspan=12 align=left id=ma>
 	     <table width=100%>
 	      <tr id=ma>
-	       <td width=30% align=left><b>Total:</b> <?=$total_pais?></td>       
+	       <td width=30% align=left><b>Total:</b> <?=$total_efectores?></td>       
 	       <td width=40% align=right><?=$link_pagina?></td>
 	      </tr>
 	    </table>

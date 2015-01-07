@@ -31,7 +31,7 @@ $sql_tmp="select * from sistema.usuarios";
 <table cellspacing=2 cellpadding=2 border=0 width=100% align=center>
      <tr>
       <td align=center>
-		<?list($sql,$total_pais,$link_pagina,$up) = form_busqueda($sql_tmp,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
+		<?list($sql,$total_efectores,$link_pagina,$up) = form_busqueda($sql_tmp,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
 	    &nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'>
 	  </td>
      </tr>

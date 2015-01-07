@@ -2,7 +2,7 @@
 
 require_once("../../config.php");
 
-variables_form_busqueda("listado_efectores");
+variables_form_busqueda("listado_beneficiarios");
 $fecha_hoy=date("Y-m-d H:i:s");
 $fecha_hoy=fecha($fecha_hoy);
 
@@ -20,8 +20,8 @@ if ($_GET['borrar']){
 if ($cmd == "") $cmd="mensual";
 
 $orden = array(
-        "default" => "3",
-		"default_up" => "0",
+        "default" => "1",
+		"default_up" => "1",
         "1" => "beneficiario.apellido",
         "2" => "beneficiario.nombre"
        );
